@@ -2,7 +2,7 @@
  * Scratch++.cpp
  *
  *  Created on: 3 Sep 2012
- *      Author: Thomas
+ *      Author: TRocket
  */
 #include <iostream.h>
 
