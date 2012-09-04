@@ -1,5 +1,5 @@
 /*
- * Scratch++.cpp
+ * Itchy++.cpp
  *
  *  Created on: 3 Sep 2012
  *      Author: TRocket
