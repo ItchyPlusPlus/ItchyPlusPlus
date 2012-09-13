@@ -4,10 +4,12 @@
  *  Created on: 6 Sep 2012
  *      Author: TRocket
  */
-#include <iostream.h>
+#include <iostream>
+
+using namespace std;
 
 int main(){
-	cout << "Itchy++";
+	cout << "Itchy++" << endl;
 	return 0;
 }
 
