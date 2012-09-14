@@ -2,7 +2,7 @@
  * Itchy.h
  *
  *  Created on: Sep 13, 2012
- *      Author: Benjamin
+ *      Author: lolzballs
  */
 
 #ifndef ITCHY_H_
