@@ -1,77 +1,57 @@
 /*
  * Itchy.cpp
  *
- *  Created on: Sep 13, 2012
+ *  Created on: Sep 14, 2012
  *      Author: lolzballs
  */
-#include "Itchy.h"
 
-Itchy::Itchy(){
-	Running = true;
-	Surf_Display = NULL;
-}
+#include <SDL.h>
 
-// OnEvent Function
-void Itchy::OnEvent(SDL_Event* Event) {
-	if(Event->type == SDL_QUIT) {
-	        Running = false;
-	}
-}
+const int WINDOW_WIDTH = 640;
+const int WINDOW_HEIGHT = 480;
+const char* WINDOW_TITLE = "Itchy++";
 
-// OnLoop Function
-void Itchy::OnLoop() {
+int main(int argc, char **argv)
+{
+   SDL_Init( SDL_INIT_VIDEO );
+   SDL_Surface* screen = SDL_SetVideoMode( WINDOW_WIDTH, WINDOW_HEIGHT, 0, SDL_HWSURFACE | SDL_DOUBLEBUF );
+   SDL_WM_SetCaption( WINDOW_TITLE, 0 );
 
-}
+   //Load the background
+   SDL_Surface* bitmap = SDL_LoadBMP("background.bmp");
+   //Won't work with just background.bmp :/
 
-// OnCleanup Function
-void Itchy::OnCleanup() {
-	SDL_Quit();
-}
+   // Part of the background we want to draw
+   SDL_Rect source;
+   source.x = 0;
+   source.y = 0;
+   source.w = 48;
+   source.h = 48;
 
-//OnRender Function
-void Itchy::OnRender() {
+   // Part of the screen we want to draw the sprite to
+   SDL_Rect destination;
+   destination.x = 0;
+   destination.y = 0;
+   destination.w = 640;
+   destination.h = 480;
+   SDL_Event event;
 
-}
+   bool gameRunning = true;
 
-//OnInit Function
-bool Itchy::OnInit(){
-	if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-	        return false;
-	    }
+   while (gameRunning)
+   {
+      if (SDL_PollEvent(&event))
+      {
+         if (event.type == SDL_QUIT)
+         {
+            gameRunning = false;
+         }
+      }
 
-	    if((Surf_Display = SDL_SetVideoMode(640, 480, 32, SDL_HWSURFACE | SDL_DOUBLEBUF)) == NULL) {
-	        return false;
-	    }
-
-	    return true;
-}
-
-//OnExecute Function
-int Itchy::OnExecute(){
-	if(OnInit() == false) {
-	        return -1;
-	    }
-
-	    SDL_Event Event;
-
-	    while(Running) {
-	        while(SDL_PollEvent(&Event)) {
-	            OnEvent(&Event);
-	        }
-
-	        OnLoop();
-	        OnRender();
-	    }
-
-	    OnCleanup();
-
-	    return 0;
-}
-
-/*MAIN Function
- * Starts the GUI using the OnExecute function
- */
-int main(int argc, char* argv[]) {
-	Itchy theApp;
-	return theApp.OnExecute();
+      SDL_BlitSurface(bitmap, &source, screen, &destination);
+      SDL_Flip(screen);
+   }
+   SDL_FreeSurface(bitmap);
+   SDL_Quit();
+   return 0;
 }
