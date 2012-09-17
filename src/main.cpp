@@ -4,6 +4,9 @@
 
 #include <cairo/cairo.h>
 
+
+#include "scratchio.h"
+
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
 const char* WINDOW_TITLE = "Itchy++";
@@ -16,6 +19,8 @@ int main(int argc, char** argv) {
 	SDL_Event event;
 
 	bool gameRunning = true;
+
+    openFromFile("project.sb");
 
 	int r = 0;
 
