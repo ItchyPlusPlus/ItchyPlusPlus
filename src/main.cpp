@@ -16,7 +16,7 @@ const char* WINDOW_TITLE = "Itchy++";
 
 int main(int argc, char** argv) {
 
-	long long last;
+	long long last = SDL_GetTicks();
 
 	//Start the window
 	SDL_Init(SDL_INIT_VIDEO);
@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 
 		SDL_Flip(screen);
 
-		SDL_Delay(1);
+		//SDL_Delay(1000/60);
 	}
 	SDL_Quit();
 	return 0;
