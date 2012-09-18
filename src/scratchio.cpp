@@ -84,7 +84,7 @@ void openFromFile(const char* path) {
 
 void openFromStream(istream* s) {
 	ByteStream stream(s);
-ahea
+
 	for (int i = 0; i < 10; i++) {
 		cout << (char) stream.uint8();
 	}
