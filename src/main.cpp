@@ -3,6 +3,7 @@
 #include <cairo/cairo.h>
 #include <string>
 #include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ int main(int argc, char** argv) {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Surface* screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 0, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	SDL_WM_SetCaption(WINDOW_TITLE, 0);
+        cout << "Window Started." << endl;
 
 	SDL_Event event;
 
