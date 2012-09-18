@@ -80,6 +80,14 @@ void ByteStream::readBlockR(void* block, uint32_t size) {
 }
 
 
+ObjectRecord::ObjectRecord(uint8_t id, uint8_t version, char* data, ObjectRecord** fields, uint32_t fieldCount) {
+	this->id = id;
+	this->version = version;
+	this->data = data;
+	this->fields = fields;
+	this->fieldCount = fieldCount;
+}
+
 ScratchReader::ScratchReader(ByteStream* stream) {
 	this->stream = stream;
 }
@@ -105,7 +113,7 @@ void ScratchReader::readObjectStore() {
 
 		cout << "object size: " << size << endl;
 
-		for (int i = 0; i < size; i++) {
+		for (uint32_t i = 0; i < size; i++) {
 			this->readObject();
 		}
 	} else {
@@ -113,16 +121,90 @@ void ScratchReader::readObjectStore() {
 	}
 }
 
-void ScratchReader::readObject() {
+ObjectRecord* ScratchReader::readObject() {
 	uint8_t id = this->stream->uint8();
-	if (id < 99) {
-		readFixedFormat(id);
-	}
 	cout << "id: " << (int) id << endl;
+	if (id < 100) {
+		return readFixedFormat(id);
+	}
+	cout << "WUT??" << endl;
+	return NULL;
 }
 
-void ScratchReader::readFixedFormat(uint8_t id) {
+ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
+	uint32_t length;
 
+	ObjectRecord** fields;
+	uint32_t fieldCount;
+
+	uint32_t ref = 0;
+
+	char* b;
+
+	switch (id) {
+	case 1: // Nil
+	case 2: // True
+	case 3: // False
+		length = 0;
+		break;
+	case 4: // SmallInteger
+		length = 4;
+		break;
+	case 5: // SmallInteger16
+		length = 2;
+		break;
+	// long int stuff to come
+	case 8: // Float
+		length = 8;
+		break;
+	case 9: // String
+	case 10: // Symbol
+	case 11: // ByteArray
+	case 14: // UTF8
+		length = this->stream->uint32();
+		break;
+	case 12: // SoundBuffer
+		length = this->stream->uint32() * 2;
+		break;
+	case 13: // Bitmap
+		length = this->stream->uint32() * 4;
+		break;
+	case 20: // Array
+	case 21: // OrderedCollection
+	case 24: // Dictionary
+	case 25: // IdentityDictionary
+		length = this->stream->uint32();
+		if (id > 23) {
+			length *= 2;
+		}
+		fields = new ObjectRecord*[length];
+		fieldCount = length;
+
+		for (uint32_t i = 0; i < length; i++) {
+			fields[i] = this->readObject();
+		}
+		length = 0;
+		break;
+	case 99:
+		length = 0;
+		b = new char[4];
+		b[0] = 0;
+		this->stream->readBlockR(b + 1, 3);
+		ref = (uint32_t) *b;
+		break;
+	default:
+		length = 0;
+		fields = NULL;
+		fieldCount = 0;
+		cout << "Unknown field ID: " << (int) id << endl;
+	}
+
+	char* data = new char[length];
+	this->stream->readBlock(data, length);
+
+	ObjectRecord* record = new ObjectRecord(id, ref, data, fields, fieldCount);
+
+	return record;
 }
 
 

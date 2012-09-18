@@ -35,9 +35,12 @@ private:
 
 class ObjectRecord {
 public:
+	ObjectRecord(uint8_t, uint8_t, char*, ObjectRecord**, uint32_t);
 	uint8_t id;
 	uint8_t version;
-	uint8_t fieldCount;
+	char* data;
+	ObjectRecord** fields;
+	uint32_t fieldCount;
 };
 
 class ScratchReader {
@@ -45,9 +48,8 @@ public:
 	ScratchReader(ByteStream*);
 	void readProject();
 	void readObjectStore();
-	void readObject();
-	ObjectRecord* readField();
-	void readFixedFormat(uint8_t);
+	ObjectRecord* readObject();
+	ObjectRecord* readFixedFormat(uint8_t);
 private:
 	ByteStream* stream;
 };
