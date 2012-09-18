@@ -143,17 +143,15 @@ int main(int argc, char** argv) {
                 
                 //If a second has passed since the caption was last updated
                 if( update.get_ticks() > 1000 ){
-                //The frame rate as a string
-                stringstream caption;
+                    //Calculate the frames per second and create the string
+                    stringstream Cap;
+                    Cap << "Itchy++, " << "Average Frames Per Second: " << frame / (fps.get_ticks() / 1000.f);
+                    
+                    //Reset the caption
+                    SDL_WM_SetCaption( Cap.str().c_str() , NULL );
 
-                //Calculate the frames per second and create the string
-                 caption << "Average Frames Per Second: " << frame / ( fps.get_ticks() / 1000.f );
-
-                //Reset the caption
-                SDL_WM_SetCaption( caption.str().c_str(), NULL );
-
-                //Restart the update timer
-                update.start();
+                    //Restart the update timer
+                    update.start();
                 }
                 
                 //Render the stuff.
