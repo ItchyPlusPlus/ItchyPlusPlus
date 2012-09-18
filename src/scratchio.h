@@ -35,10 +35,11 @@ private:
 
 class ObjectRecord {
 public:
-	ObjectRecord(uint8_t, uint8_t, char*, ObjectRecord**, uint32_t);
+	ObjectRecord(uint8_t, uint8_t, char*, uint32_t, ObjectRecord**, uint32_t);
 	uint8_t id;
 	uint8_t version;
 	char* data;
+	uint32_t dataSize;
 	ObjectRecord** fields;
 	uint32_t fieldCount;
 };

@@ -80,10 +80,11 @@ void ByteStream::readBlockR(void* block, uint32_t size) {
 }
 
 
-ObjectRecord::ObjectRecord(uint8_t id, uint8_t version, char* data, ObjectRecord** fields, uint32_t fieldCount) {
+ObjectRecord::ObjectRecord(uint8_t id, uint8_t version, char* data, uint32_t dataSize, ObjectRecord** fields, uint32_t fieldCount) {
 	this->id = id;
 	this->version = version;
 	this->data = data;
+	this->dataSize = dataSize;
 	this->fields = fields;
 	this->fieldCount = fieldCount;
 }
@@ -100,6 +101,7 @@ void ScratchReader::readProject() {
 		cout << "info size: " << this->stream->uint32() << endl;
 
 		this->readObjectStore();
+		//this->readObjectStore();
 	} else {
 		cout << "not scratch project" << endl;
 	}
@@ -132,10 +134,10 @@ ObjectRecord* ScratchReader::readObject() {
 }
 
 ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
-	uint32_t length;
+	uint32_t length = 0;
 
-	ObjectRecord** fields;
-	uint32_t fieldCount;
+	ObjectRecord** fields = NULL;
+	uint32_t fieldCount = 0;
 
 	uint32_t ref = 0;
 
@@ -172,10 +174,32 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 	case 20: // Array
 	case 21: // OrderedCollection
 	case 24: // Dictionary
-	case 25: // IdentityDictionary
-		length = this->stream->uint32();
-		if (id > 23) {
-			length *= 2;
+	case 25: // IdentityDictionar
+	case 32: // Point
+	case 33: // Rectangle
+	case 34: // Form
+	case 35: // ColorForm
+		switch (id) {
+			case 20:
+			case 21:
+				length = this->stream->uint32();
+				break;
+			case 24:
+			case 25:
+				length = this->stream->uint32() * 2;
+				break;
+			case 32:
+				length = 2;
+				break;
+			case 33:
+				length = 4;
+				break;
+			case 34:
+				length = 5;
+				break;
+			case 35:
+				length = 6;
+				break;
 		}
 		fields = new ObjectRecord*[length];
 		fieldCount = length;
@@ -185,7 +209,13 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		}
 		length = 0;
 		break;
-	case 99:
+	case 30: // Color
+		length = 4;
+		break;
+	case 31: // TranslucentColor
+		length = 5;
+		break;
+	case 99: // ObjectRef
 		length = 0;
 		b = new char[4];
 		b[0] = 0;
@@ -193,16 +223,13 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		ref = (uint32_t) *b;
 		break;
 	default:
-		length = 0;
-		fields = NULL;
-		fieldCount = 0;
 		cout << "Unknown field ID: " << (int) id << endl;
 	}
 
 	char* data = new char[length];
 	this->stream->readBlock(data, length);
 
-	ObjectRecord* record = new ObjectRecord(id, ref, data, fields, fieldCount);
+	ObjectRecord* record = new ObjectRecord(id, ref, data, length, fields, fieldCount);
 
 	return record;
 }
