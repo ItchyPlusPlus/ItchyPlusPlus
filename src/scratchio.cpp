@@ -100,14 +100,16 @@ void ScratchReader::readProject() {
 
 		cout << "info size: " << this->stream->uint32() << endl;
 
-		this->readObjectStore();
-		this->readObjectStore();
+		ObjectRecord* infoRecord = this->readObjectStore();
+		ObjectRecord* stageRecord = this->readObjectStore();
+
+		Stage* stage = new Stage(stageRecord);
 	} else {
 		cout << "not scratch project" << endl;
 	}
 }
 
-void ScratchReader::readObjectStore() {
+ObjectRecord* ScratchReader::readObjectStore() {
 	if (strcmp(this->stream->readString(10), "ObjS\0Stch\0") != 0) {
 		cout << "is object" << endl;
 
@@ -128,14 +130,16 @@ void ScratchReader::readObjectStore() {
 					if (fields[j]->id == 99) {
 						uint32_t pointer = *(uint32_t*) fields[j]->data;
 						delete fields[j];
-						fields[j] = table[pointer];
+						fields[j] = table[pointer - 1];
 					}
 				}
 			}
 		}
-	} else {
-		cout << "not object" << endl;
+
+		return table[0];
 	}
+	cout << "not object" << endl;
+	return NULL;
 }
 
 ObjectRecord* ScratchReader::readObject() {

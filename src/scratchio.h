@@ -8,6 +8,12 @@
 #include <stdint.h>
 #include <string.h>
 
+class ByteStream;
+class ObjectRecord;
+class ScratchReader;
+
+#include "scratchobjects.h"
+
 using namespace std;
 
 void openFromFile(const char*);
@@ -49,7 +55,7 @@ class ScratchReader {
 public:
 	ScratchReader(ByteStream*);
 	void readProject();
-	void readObjectStore();
+	ObjectRecord* readObjectStore();
 	ObjectRecord* readObject();
 	ObjectRecord* readFixedFormat(uint8_t);
 private:
