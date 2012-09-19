@@ -101,7 +101,7 @@ void ScratchReader::readProject() {
 		cout << "info size: " << this->stream->uint32() << endl;
 
 		this->readObjectStore();
-		//this->readObjectStore();
+		this->readObjectStore();
 	} else {
 		cout << "not scratch project" << endl;
 	}
@@ -143,20 +143,18 @@ ObjectRecord* ScratchReader::readObject() {
 	//cout << "id: " << (int) id << endl;
 	if (id < 100) {
 		return readFixedFormat(id);
-	} else {
-		uint8_t version = this->stream->uint8();
-
-		uint8_t fieldCount = this->stream->uint8();
-		ObjectRecord** fields = new ObjectRecord*[fieldCount];
-
-		for (uint32_t i = 0; i < fieldCount; i++) {
-			fields[i] = this->readObject();
-		}
-
-		return new ObjectRecord(id, version, NULL, 0, fields, fieldCount);
 	}
-	cout << "WUT??" << endl;
-	return NULL;
+
+	uint8_t version = this->stream->uint8();
+
+	uint8_t fieldCount = this->stream->uint8();
+	ObjectRecord** fields = new ObjectRecord*[fieldCount];
+
+	for (uint32_t i = 0; i < fieldCount; i++) {
+		fields[i] = this->readObject();
+	}
+
+	return new ObjectRecord(id, version, NULL, 0, fields, fieldCount);
 }
 
 ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
