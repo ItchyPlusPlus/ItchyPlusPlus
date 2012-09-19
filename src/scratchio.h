@@ -2,6 +2,7 @@
 #define SCRATCHIO_H__
 
 #include <algorithm>
+#include <endian.h>
 #include <iostream>
 #include <fstream>
 #include <stdint.h>

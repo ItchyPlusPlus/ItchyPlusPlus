@@ -87,7 +87,7 @@ int main(int argc, char** argv) {
 
 		SDL_Flip(screen);
 
-		//SDL_Delay(1000/60);
+		SDL_Delay(1000/60);
 	}
 	SDL_Quit();
 	return 0;

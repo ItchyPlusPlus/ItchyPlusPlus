@@ -53,15 +53,15 @@ int64_t ByteStream::int64() {
 }
 
 float ByteStream::float32() {
-	float n;
+	uint32_t n;
 	this->readBlockR(&n, sizeof(float));
-	return n;
+	return htobe32(n);
 }
 
 double ByteStream::float64() {
-	double n;
+	uint64_t n;
 	this->readBlockR(&n, sizeof(double));
-	return n;
+	return htobe64(n);
 }
 
 char* ByteStream::readString(uint32_t size) {
@@ -101,7 +101,7 @@ void ScratchReader::readProject() {
 		cout << "info size: " << this->stream->uint32() << endl;
 
 		this->readObjectStore();
-		//this->readObjectStore();
+		this->readObjectStore();
 	} else {
 		cout << "not scratch project" << endl;
 	}
@@ -125,9 +125,20 @@ void ScratchReader::readObjectStore() {
 
 ObjectRecord* ScratchReader::readObject() {
 	uint8_t id = this->stream->uint8();
-	cout << "id: " << (int) id << endl;
+	//cout << "id: " << (int) id << endl;
 	if (id < 100) {
 		return readFixedFormat(id);
+	} else {
+		uint8_t version = this->stream->uint8();
+
+		uint8_t fieldCount = this->stream->uint8();
+		ObjectRecord** fields = new ObjectRecord*[fieldCount];
+
+		for (uint32_t i = 0; i < fieldCount; i++) {
+			fields[i] = this->readObject();
+		}
+
+		return new ObjectRecord(id, version, NULL, 0, fields, fieldCount);
 	}
 	cout << "WUT??" << endl;
 	return NULL;
@@ -138,8 +149,6 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 
 	ObjectRecord** fields = NULL;
 	uint32_t fieldCount = 0;
-
-	uint32_t ref = 0;
 
 	char* b;
 
@@ -216,11 +225,7 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		length = 5;
 		break;
 	case 99: // ObjectRef
-		length = 0;
-		b = new char[4];
-		b[0] = 0;
-		this->stream->readBlockR(b + 1, 3);
-		ref = (uint32_t) *b;
+		length = 3;
 		break;
 	default:
 		cout << "Unknown field ID: " << (int) id << endl;
@@ -229,7 +234,7 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 	char* data = new char[length];
 	this->stream->readBlock(data, length);
 
-	ObjectRecord* record = new ObjectRecord(id, ref, data, length, fields, fieldCount);
+	ObjectRecord* record = new ObjectRecord(id, 0, data, length, fields, fieldCount);
 
 	return record;
 }
