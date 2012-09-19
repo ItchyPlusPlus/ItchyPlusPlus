@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 
 	bool itchyRunning = true;
 
-	openFromFile("project.sb");
+	openFromFile("/home/thomas/project.sb");
 
 	int r = 0;
 

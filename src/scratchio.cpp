@@ -79,6 +79,10 @@ void ByteStream::readBlockR(void* block, uint32_t size) {
 	std::reverse((char*) block, (char*) block + size);
 }
 
+ObjectTable::ObjectTable(ObjectRecord** table, int size){
+this->table=table;
+this->size=size;
+}
 
 ObjectRecord::ObjectRecord(uint8_t id, uint8_t version, char* data, uint32_t dataSize, ObjectRecord** fields, uint32_t fieldCount) {
 	this->id = id;
@@ -100,20 +104,20 @@ void ScratchReader::readProject() {
 
 		cout << "info size: " << this->stream->uint32() << endl;
 
-		this->readObjectStore();
-		this->readObjectStore();
+		ObjectTable* info = this->readObjectStore();
+		ObjectTable* project = this->readObjectStore();
 	} else {
 		cout << "not scratch project" << endl;
 	}
 }
 
-void ScratchReader::readObjectStore() {
+ObjectTable* ScratchReader::readObjectStore() {
 	if (strcmp(this->stream->readString(10), "ObjS\0Stch\0") != 0) {
-		cout << "is object" << endl;
+		cout << "is object table" << endl;
 
 		uint32_t size = this->stream->uint32();
 
-		cout << "object size: " << size << endl;
+		cout << "object table size: " << size << endl;
 		ObjectRecord** table = new ObjectRecord*[size];
 
 		for (uint32_t i = 0; i < size; i++) {
@@ -133,14 +137,16 @@ void ScratchReader::readObjectStore() {
 				}
 			}
 		}
+		return new ObjectTable(table, size);
 	} else {
-		cout << "not object" << endl;
+		cout << "not object table" << endl;
+		return NULL;
 	}
 }
 
 ObjectRecord* ScratchReader::readObject() {
 	uint8_t id = this->stream->uint8();
-	//cout << "id: " << (int) id << endl;
+	cout << "id: " << (int) id << endl;
 	if (id < 100) {
 		return readFixedFormat(id);
 	}

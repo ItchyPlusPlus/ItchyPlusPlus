@@ -45,15 +45,24 @@ public:
 	uint32_t fieldCount;
 };
 
+class ObjectTable {
+public:
+	ObjectTable(ObjectRecord** table, int size);
+	ObjectRecord** table;
+	int size;
+};
+
 class ScratchReader {
 public:
 	ScratchReader(ByteStream*);
 	void readProject();
-	void readObjectStore();
+	ObjectTable* readObjectStore();
 	ObjectRecord* readObject();
 	ObjectRecord* readFixedFormat(uint8_t);
 private:
 	ByteStream* stream;
 };
+
+
 
 #endif
