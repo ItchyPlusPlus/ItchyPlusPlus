@@ -101,7 +101,7 @@ void ScratchReader::readProject() {
 		cout << "info size: " << this->stream->uint32() << endl;
 
 		this->readObjectStore();
-		this->readObjectStore();
+		//this->readObjectStore();
 	} else {
 		cout << "not scratch project" << endl;
 	}
@@ -114,9 +114,24 @@ void ScratchReader::readObjectStore() {
 		uint32_t size = this->stream->uint32();
 
 		cout << "object size: " << size << endl;
+		ObjectRecord** table = new ObjectRecord*[size];
 
 		for (uint32_t i = 0; i < size; i++) {
-			this->readObject();
+			table[i] = this->readObject();
+		}
+
+		for (uint32_t i = 0; i < size; i++) {
+			ObjectRecord* object = table[i];
+			ObjectRecord** fields = object->fields;
+			if (fields != NULL) {
+				for (uint32_t j = 0; j < object->fieldCount; j++) {
+					if (fields[j]->id == 99) {
+						uint32_t pointer = *(uint32_t*) fields[j]->data;
+						delete fields[j];
+						fields[j] = table[pointer];
+					}
+				}
+			}
 		}
 	} else {
 		cout << "not object" << endl;
@@ -150,7 +165,7 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 	ObjectRecord** fields = NULL;
 	uint32_t fieldCount = 0;
 
-	char* b;
+	char* data = NULL;
 
 	switch (id) {
 	case 1: // Nil
@@ -225,14 +240,19 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		length = 5;
 		break;
 	case 99: // ObjectRef
-		length = 3;
+		length = 4;
+		data = new char[length];
+		data[3] = 0;
+		this->stream->readBlockR(data, 3);
 		break;
 	default:
 		cout << "Unknown field ID: " << (int) id << endl;
 	}
 
-	char* data = new char[length];
-	this->stream->readBlock(data, length);
+	if (data == NULL) {
+		data = new char[length];
+		this->stream->readBlock(data, length);
+	}
 
 	ObjectRecord* record = new ObjectRecord(id, 0, data, length, fields, fieldCount);
 
