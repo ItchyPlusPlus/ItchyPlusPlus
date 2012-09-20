@@ -3,6 +3,7 @@
 
 #include <cairo/cairo.h>
 #include <sstream>
+#include "scratchio.h"
 
 class Scriptable;
 class Stage;
@@ -12,8 +13,6 @@ class Media;
 class Image;
 
 class Form;
-
-#include "scratchio.h"
 
 class Scriptable {
 public:

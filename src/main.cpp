@@ -4,11 +4,9 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "scratchio.h"
 
 using namespace std;
-
-
-#include "scratchio.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;

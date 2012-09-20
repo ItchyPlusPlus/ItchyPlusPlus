@@ -106,9 +106,9 @@ ScratchReader::ScratchReader(ByteStream* stream) {
 
 Stage* ScratchReader::readProject() {
 	if (strcmp(this->stream->readString(10), "ScratchV02") != 0) {
-		cout << "scratch project" << endl;
+		cout << "Scratch Project" << endl;
 
-		cout << "info size: " << this->stream->uint32() << endl;
+		cout << "Info Size: " << this->stream->uint32() << endl;
 
 		ObjectRecord* infoRecord = this->readObjectStore();
 		ObjectRecord* stageRecord = this->readObjectStore();
@@ -116,17 +116,17 @@ Stage* ScratchReader::readProject() {
 		Stage* stage = new Stage(stageRecord);
 		return stage;
 	}
-	cout << "not scratch project" << endl;
+	cout << "Not a Scratch Project" << endl;
 	return NULL;
 }
 
 ObjectRecord* ScratchReader::readObjectStore() {
 	if (strcmp(this->stream->readString(10), "ObjS\0Stch\0") != 0) {
-		cout << "is object" << endl;
+		cout << "Is Object" << endl;
 
 		uint32_t size = this->stream->uint32();
 
-		cout << "object size: " << size << endl;
+		cout << "Object Size: " << size << endl;
 		ObjectRecord** table = new ObjectRecord*[size];
 
 		for (uint32_t i = 0; i < size; i++) {
@@ -149,7 +149,7 @@ ObjectRecord* ScratchReader::readObjectStore() {
 
 		return table[0];
 	}
-	cout << "not object" << endl;
+	cout << "Not Object" << endl;
 	return NULL;
 }
 
