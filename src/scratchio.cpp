@@ -1,7 +1,17 @@
 #include "scratchio.h"
 
+OSB::OSB(uint8_t* s, size_t n) {
+	char* c = (char*) s;
+	setg(c, c, c + n);
+}
+
+
 ByteStream::ByteStream(istream* stream) {
 	this->stream = stream;
+}
+
+ByteStream::ByteStream(uint8_t* block, uint32_t size) {
+    this->stream = new std::istream(new OSB(block, size - 1));
 }
 
 uint8_t ByteStream::uint8() {
@@ -94,7 +104,7 @@ ScratchReader::ScratchReader(ByteStream* stream) {
 }
 
 
-void ScratchReader::readProject() {
+Stage* ScratchReader::readProject() {
 	if (strcmp(this->stream->readString(10), "ScratchV02") != 0) {
 		cout << "scratch project" << endl;
 
@@ -104,9 +114,10 @@ void ScratchReader::readProject() {
 		ObjectRecord* stageRecord = this->readObjectStore();
 
 		Stage* stage = new Stage(stageRecord);
-	} else {
-		cout << "not scratch project" << endl;
+		return stage;
 	}
+	cout << "not scratch project" << endl;
+	return NULL;
 }
 
 ObjectRecord* ScratchReader::readObjectStore() {
@@ -177,9 +188,15 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		break;
 	case 4: // SmallInteger
 		length = 4;
+		data = new char[length];
+		this->stream->readBlockR(data, length);
 		break;
 	case 5: // SmallInteger16
-		length = 2;
+		length = 4;
+		data = new char[length];
+		data[2] = 0;
+		data[3] = 0;
+		this->stream->readBlockR(data, 2);
 		break;
 	// long int stuff to come
 	case 8: // Float
@@ -262,22 +279,24 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 }
 
 
-void openFromFile(const char* path) {
+Stage* openFromFile(const char* path) {
 	ifstream::pos_type size;
 
     ifstream file(path, ios::in|ios::binary);
 
     if (file.is_open()) {
-		openFromStream(&file);
+		Stage* stage = openFromStream(&file);
 
         file.close();
-    } else {
-        cout << "Unable to open file" << endl;
+
+        return stage;
     }
+	cout << "Unable to open file" << endl;
+	return NULL;
 }
 
-void openFromStream(istream* s) {
+Stage* openFromStream(istream* s) {
 	ByteStream stream(s);
 	ScratchReader reader(&stream);
-	reader.readProject();
+	return reader.readProject();
 }

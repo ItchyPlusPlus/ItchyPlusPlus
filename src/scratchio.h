@@ -7,7 +7,11 @@
 #include <fstream>
 #include <stdint.h>
 #include <string.h>
+#include <streambuf>
+#include <istream>
+#include <ostream>
 
+struct OSB;
 class ByteStream;
 class ObjectRecord;
 class ScratchReader;
@@ -16,12 +20,17 @@ class ScratchReader;
 
 using namespace std;
 
-void openFromFile(const char*);
-void openFromStream(istream*);
+Stage* openFromFile(const char*);
+Stage* openFromStream(istream*);
+
+struct OSB : public std::streambuf {
+    OSB(uint8_t*, size_t);
+};
 
 class ByteStream {
 public:
 	ByteStream(istream*);
+	ByteStream(uint8_t*, uint32_t);
 	uint8_t uint8();
 	uint16_t uint16();
 	uint32_t uint32();
@@ -54,7 +63,7 @@ public:
 class ScratchReader {
 public:
 	ScratchReader(ByteStream*);
-	void readProject();
+	Stage* readProject();
 	ObjectRecord* readObjectStore();
 	ObjectRecord* readObject();
 	ObjectRecord* readFixedFormat(uint8_t);

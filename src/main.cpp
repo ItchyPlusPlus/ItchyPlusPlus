@@ -22,13 +22,12 @@ int main(int argc, char** argv) {
 	SDL_Init(SDL_INIT_VIDEO);
 	SDL_Surface* screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 0, SDL_HWSURFACE | SDL_DOUBLEBUF);
 	SDL_WM_SetCaption(WINDOW_TITLE, 0);
-        cout << "Window Started." << endl;
 
 	SDL_Event event;
 
 	bool itchyRunning = true;
 
-	openFromFile("project.sb");
+	Stage* stage = openFromFile("project.sb");
 
 	int r = 0;
 
@@ -61,23 +60,12 @@ int main(int argc, char** argv) {
 		cairo_set_source_rgb(cr, 255, 255, 255);
 		cairo_paint(cr);
 
-		cairo_save(cr);
-		cairo_set_source_rgb(cr, 0, 255, 0);
-		cairo_translate(cr, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-		cairo_rotate(cr, r++ * (M_PI/180));
-		cairo_rectangle(cr, -40, -40, 80, 80);
-		cairo_fill(cr);
-		cairo_restore(cr);
-
-		cairo_set_source_rgb(cr, 0, 0, 0);
-		cairo_move_to(cr, 0, 20);
-		cairo_set_font_size(cr, 20);
-		cairo_show_text(cr, "Itchy++ Dev.");
-
 		cairo_set_source_rgb(cr, 0, 0, 0);
 		cairo_move_to(cr, 550, 20);
 		cairo_set_font_size(cr, 10);
 		cairo_show_text(cr, caption.str().c_str());
+
+		stage->drawOn(cr);
 
 		cairo_destroy(cr);
 
