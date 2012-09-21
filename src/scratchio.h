@@ -10,12 +10,13 @@
 #include <streambuf>
 #include <istream>
 #include <ostream>
-#include "scratchobjects.h"
 
 struct OSB;
 class ByteStream;
 class ObjectRecord;
 class ScratchReader;
+
+#include "scratchobjects.h"
 
 using namespace std;
 
