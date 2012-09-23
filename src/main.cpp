@@ -16,6 +16,11 @@ const char* WINDOW_TITLE = "Itchy++";
 
 int main(int argc, char** argv) {
 
+	if(argc == 1)
+		char* project = "project.sb";
+	else
+		char* project = argv[1]; 
+
 	long long last = SDL_GetTicks();
 
 	//Start the window
