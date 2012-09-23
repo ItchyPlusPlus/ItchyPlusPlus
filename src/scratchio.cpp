@@ -291,7 +291,7 @@ Stage* openFromFile(const char* path) {
 
         return stage;
     }
-	cout << "Fatal Error: Unable to open file" << endl;
+	cout << "Fatal Error: Unable to open file: " << path << endl;
 	exit(1);
 	return NULL;
 }
