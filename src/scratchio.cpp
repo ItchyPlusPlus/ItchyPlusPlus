@@ -121,7 +121,7 @@ Stage* ScratchReader::readProject() {
 }
 
 ObjectRecord* ScratchReader::readObjectStore() {
-	if (strcmp(this->stream->readString(10), "ObjS\0Stch\0") != 0) {
+	if (memcmp(this->stream->readString(10), "ObjS\x01Stch\x01", 10) == 0) {
 		cout << "Is Object" << endl;
 
 		uint32_t size = this->stream->uint32();
