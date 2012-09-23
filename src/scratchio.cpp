@@ -105,7 +105,7 @@ ScratchReader::ScratchReader(ByteStream* stream) {
 
 
 Stage* ScratchReader::readProject() {
-	if (strcmp(this->stream->readString(10), "ScratchV02") != 0) {
+	if (strcmp(this->stream->readString(10), "ScratchV02") == 0) {
 		cout << "Scratch Project" << endl;
 
 		cout << "Info Size: " << this->stream->uint32() << endl;
