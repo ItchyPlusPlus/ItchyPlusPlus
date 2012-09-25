@@ -8,8 +8,11 @@ It is still in early devolopment stages so check back later.
 
 If you want to check what we have so far, you will have to checkout our repo and compile it. No support will be given to those who compile.
 
-To Compile, you will need the SDL and cairo libraries, and of course, with any compication you will need a compiler.
+To compile, you will need the SDL and cairo libraries as well as a standard GNU build system (g++, make, pkg-config etc.).
 
+For ubuntu run this command first:
+
+    sudo apt-get install build-essentials
 
 Then compiling is just as simple as this:
 
