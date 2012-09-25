@@ -4,7 +4,7 @@ Itchy++ is a Scratch-like program made in C++.
 It is still in early devolopment stages so check back later.
 
 # Compilation
-######Warning, compiling is for more advanced people.
+######Warning, compiling is for more advanced people. However it is currently the only way to try Itchy++ yourself
 
 If you want to check what we have so far, you will have to checkout our repo and compile it. No support will be given to those who compile in these early stages of development, though drop us an Issue and we may help.
 
