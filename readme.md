@@ -6,7 +6,7 @@ It is still in early devolopment stages so check back later.
 # Compilation
 ######Warning, compiling is for more advanced people.
 
-If you want to check what we have so far, you will have to checkout our repo and compile it. No support will be given to those who compile.
+If you want to check what we have so far, you will have to checkout our repo and compile it. No support will be given to those who compile in these early stages of development, though drop us an Issue and we may help.
 
 To compile, you will need the SDL and cairo libraries as well as a standard GNU build system (g++, make, pkg-config etc.).
 
