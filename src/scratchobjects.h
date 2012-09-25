@@ -4,6 +4,7 @@
 #include <cairo/cairo.h>
 #include <sstream>
 
+
 class Scriptable;
 class Stage;
 class Sprite;

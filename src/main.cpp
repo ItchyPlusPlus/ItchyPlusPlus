@@ -5,8 +5,8 @@
 #include <sstream>
 #include <iostream>
 
-using namespace std;
 
+using namespace std;
 
 #include "scratchio.h"
 
@@ -15,6 +15,14 @@ const int WINDOW_HEIGHT = 480;
 const char* WINDOW_TITLE = "Itchy++";
 
 int main(int argc, char** argv) {
+	const char* PROJECT;
+	if(argc == 1)
+		PROJECT = "project.sb";
+	else
+		PROJECT = argv[1]; 
+
+	Stage* stage = openFromFile(PROJECT);
+
 
 	long long last = SDL_GetTicks();
 
@@ -26,8 +34,6 @@ int main(int argc, char** argv) {
 	SDL_Event event;
 
 	bool itchyRunning = true;
-
-	Stage* stage = openFromFile("project.sb");
 
 	int r = 0;
 
