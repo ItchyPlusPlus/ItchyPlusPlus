@@ -19,7 +19,9 @@ Then compiling is just as simple as this:
     cd src
     make
     
-Make sure there is a project.sb in the directory you are running it from.
+Make sure there is a 
+    project.sb 
+in the directory you are running it from.
     
 It currently is in very early stages so it might fail.  If you want to help please submit a pull request.
 
