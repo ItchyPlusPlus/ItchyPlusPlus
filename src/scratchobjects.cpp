@@ -45,6 +45,7 @@ void Stage::drawOn(cairo_t* cr) {
 	for (uint32_t i = 0; i < this->spriteCount; i++) {
 		this->sprites[i]->drawOn(cr);
 	}
+
 }
 
 Sprite::Sprite(ObjectRecord* record, Stage* stage) : Scriptable(record) {
