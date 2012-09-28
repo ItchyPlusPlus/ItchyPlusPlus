@@ -18,6 +18,12 @@ Then compiling is just as simple as this:
 
     cd src
     make
+To run, just double click it, or in a terminal:
+    ./itchy
+Make sure there is a project.sb in that directory or it will fail.
+
+You may also specifly a path for the project:
+    ./itchy projectName.sb
 
 It currently is in very early stages so it might fail.  If you want to help please submit a pull request.
 
