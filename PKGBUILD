@@ -1,6 +1,6 @@
 # Maintainer: William Robson (logiblocs at gmail dot com)
 pkgname=itchy-git
-pkgver=
+pkgver=VERSION
 pkgrel=0
 pkgdesc=""
 arch=('i686' 'x86_64')
