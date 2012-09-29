@@ -1,17 +1,9 @@
-# This is an example PKGBUILD file. Use this as a start to creating your own,
-# and remove these comments. For more information, see 'man PKGBUILD'.
-# NOTE: Please fill out the license field for your package! If it is unknown,
-# then please put 'unknown'.
-
-# See http://wiki.archlinux.org/index.php/VCS_PKGBUILD_Guidelines
-# for more information on packaging from GIT sources.
-
 # Maintainer: Your Name <youremail@domain.com>
-pkgname=NAME-git
-pkgver=VERSION
+pkgname=itchy-git
+pkgver=20120929
 pkgrel=1
 pkgdesc=""
-arch=()
+arch=('i686')
 url=""
 license=('GPL')
 groups=()
@@ -27,8 +19,8 @@ source=()
 noextract=()
 md5sums=() #generate with 'makepkg -g'
 
-_gitroot=GITURL
-_gitname=MODENAME
+_gitroot=git://github.com/ItchyPlusPlus/ItchyPlusPlus.git
+_gitname=ItchyPlusPlus
 
 build() {
   cd "$srcdir"
@@ -46,19 +38,16 @@ build() {
 
   rm -rf "$srcdir/$_gitname-build"
   git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
-  cd "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build/src"
 
-  #
-  # BUILD HERE
-  #
-  ./autogen.sh
-  ./configure --prefix=/usr
+  #build
   make
 }
 
 package() {
-  cd "$srcdir/$_gitname-build"
-  make DESTDIR="$pkgdir/" install
+  cd "$srcdir/$_gitname-build/src"
+  mkdir itchy "$pkgidr/usr/bin" -p
+  cp itchy "$pkgdir/usr/bin/"
 }
 
 # vim:set ts=2 sw=2 et:
