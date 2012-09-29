@@ -60,13 +60,7 @@ Sprite::Sprite(ObjectRecord* record, Stage* stage) : Scriptable(record) {
     this->x = record->fields[0]->fields[0]->doubleValue();
     this->y = record->fields[0]->fields[1]->doubleValue();
 
-
-    cout << this->x << " | " << this->y << endl;
-    cout << (int) record->fields[0]->fields[0]->intValue() << endl;
-
     this->rotation = record->fields[0]->doubleValue();
-
-    //this->rotation = 1;
 }
 
 void Sprite::drawOn(cairo_t* cr) {
