@@ -48,7 +48,9 @@ void Stage::drawOn(cairo_t* cr) {
     cairo_translate(cr, this->centerx, this->centery);
 	Scriptable::drawOn(cr);
 
+	cout << "total sprites: "<< this->spriteCount << endl;
 	for (uint32_t i = 0; i < this->spriteCount; i++) {
+		cout << "drawing sprite: " << i << endl;
 		this->sprites[i]->drawOn(cr);
 	}
     cairo_restore(cr);
