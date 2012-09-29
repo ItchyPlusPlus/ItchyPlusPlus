@@ -1,20 +1,19 @@
-# Maintainer: Your Name <youremail@domain.com>
+# Maintainer: William Robson (logiblocs at gmail dot com)
 pkgname=itchy-git
-pkgver=20120929
-pkgrel=1
+pkgver=
+pkgrel=0
 pkgdesc=""
-arch=('i686')
-url=""
+arch=('i686' 'x86_64')
+url="http://github.com/ItchyPlusPlus/ItchyPlusPlus"
 license=('GPL')
 groups=()
-depends=()
+depends=('sdl')
 makedepends=('git')
 provides=()
 conflicts=()
 replaces=()
 backup=()
 options=()
-install=
 source=()
 noextract=()
 md5sums=() #generate with 'makepkg -g'
@@ -46,8 +45,7 @@ build() {
 
 package() {
   cd "$srcdir/$_gitname-build/src"
-  mkdir itchy "$pkgidr/usr/bin" -p
-  cp itchy "$pkgdir/usr/bin/"
+  make INSTALL_PATH=usr "DESTDIR=$pkgdir" install
 }
 
 # vim:set ts=2 sw=2 et:
