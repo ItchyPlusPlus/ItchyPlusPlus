@@ -1,4 +1,4 @@
-objects = main.o Scratch1.x/scratchio.o Scratch1.x/scratchobjects.o
+objects = main.o Scratch1.x/scratchio.o Scratch1.x/scratchobjects.o Scratch2.x/Reader.cpp
 headers = Scratch1.x/scratchio.h Scratch1.x/scratchobjects.h
 binary = itchy
 INSTALL_PATH?=/usr/local
