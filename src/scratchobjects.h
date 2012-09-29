@@ -36,11 +36,19 @@ public:
 private:
 	Sprite** sprites;
 	uint32_t spriteCount;
+	int32_t centerx;
+	int32_t centery;
 };
 
 class Sprite : public Scriptable {
 public:
 	Sprite(ObjectRecord*, Stage*);
+
+	void drawOn(cairo_t*);
+private:
+    double x;
+    double y;
+    double rotation;
 };
 
 
@@ -57,8 +65,9 @@ public:
 
 	void drawOn(cairo_t*);
 	Form* form;
+	int32_t centerx;
+	int32_t centery;
 };
-
 
 class Form {
 public:

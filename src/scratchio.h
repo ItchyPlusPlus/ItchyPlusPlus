@@ -52,6 +52,11 @@ private:
 class ObjectRecord {
 public:
 	ObjectRecord(uint8_t, uint8_t, char*, uint32_t, ObjectRecord**, uint32_t);
+
+	int32_t intValue();
+	uint32_t uintValue();
+	double doubleValue();
+
 	uint8_t id;
 	uint8_t version;
 	char* data;

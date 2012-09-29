@@ -28,6 +28,10 @@ void Scriptable::drawOn(cairo_t* cr) {
 
 Stage::Stage(ObjectRecord* record) : Scriptable(record) {
 	this->stage = this;
+
+	this->centerx = record->fields[0]->fields[2]->intValue() / 2;
+	this->centery = record->fields[0]->fields[3]->intValue() / 2;
+
 	ObjectRecord* sprites = record->fields[16];
 
 	this->sprites = new Sprite*[sprites->fieldCount];
@@ -40,16 +44,39 @@ Stage::Stage(ObjectRecord* record) : Scriptable(record) {
 }
 
 void Stage::drawOn(cairo_t* cr) {
+    cairo_save(cr);
+    cairo_translate(cr, this->centerx, this->centery);
 	Scriptable::drawOn(cr);
 
 	for (uint32_t i = 0; i < this->spriteCount; i++) {
 		this->sprites[i]->drawOn(cr);
 	}
+    cairo_restore(cr);
 }
 
 Sprite::Sprite(ObjectRecord* record, Stage* stage) : Scriptable(record) {
 	this->stage = stage;
-	cout << "My name is: " << this->name << endl;
+
+    this->x = record->fields[0]->fields[0]->doubleValue();
+    this->y = record->fields[0]->fields[1]->doubleValue();
+
+
+    cout << this->x << " | " << this->y << endl;
+    cout << (int) record->fields[0]->fields[0]->intValue() << endl;
+
+    this->rotation = record->fields[0]->doubleValue();
+
+    //this->rotation = 1;
+}
+
+void Sprite::drawOn(cairo_t* cr) {
+    cairo_save(cr);
+
+    cairo_translate(cr, this->x, -this->y);
+    cairo_rotate(cr, this->rotation);
+	Scriptable::drawOn(cr);
+
+    cairo_restore(cr);
 }
 
 
@@ -60,18 +87,23 @@ Media::Media(ObjectRecord* record) {
 
 Image::Image(ObjectRecord* record) : Media(record) {
 	this->form = new Form(record->fields[1]);
+	this->centerx = record->fields[2]->fields[0]->intValue();
+	this->centery = record->fields[2]->fields[1]->intValue();
 }
 
 void Image::drawOn(cairo_t* cr) {
+    cairo_save(cr);
+    cairo_translate(cr, -this->centerx, -this->centery);
 	this->form->drawOn(cr);
+    cairo_restore(cr);
 }
 
 
 Form::Form(ObjectRecord* record) {
-	this->width = *(uint32_t*) record->fields[0]->data;
-	this->height = *(uint32_t*) record->fields[1]->data;
+	this->width = record->fields[0]->uintValue();
+	this->height = record->fields[1]->uintValue();
 
-	this->depth = *(uint32_t*) record->fields[2]->data;
+	this->depth = record->fields[2]->uintValue();
 
 	uint32_t* bitmap;
 	if (record->fields[4]->id == 11) {

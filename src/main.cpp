@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 	if(argc == 1)
 		PROJECT = "project.sb";
 	else
-		PROJECT = argv[1]; 
+		PROJECT = argv[1];
 
 	Stage* stage = openFromFile(PROJECT);
 
@@ -34,8 +34,6 @@ int main(int argc, char** argv) {
 	SDL_Event event;
 
 	bool itchyRunning = true;
-
-	int r = 0;
 
 	cairo_surface_t* crs = cairo_image_surface_create_for_data(
 		(Uint8*) screen->pixels,
@@ -62,6 +60,7 @@ int main(int argc, char** argv) {
 		SDL_LockSurface(screen);
 
 		cairo_t* cr = cairo_create(crs);
+		cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
 
 		cairo_set_source_rgb(cr, 255, 255, 255);
 		cairo_paint(cr);

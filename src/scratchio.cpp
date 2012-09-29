@@ -99,6 +99,42 @@ ObjectRecord::ObjectRecord(uint8_t id, uint8_t version, char* data, uint32_t dat
 	this->fieldCount = fieldCount;
 }
 
+int32_t ObjectRecord::intValue() {
+    switch (this->id) {
+    case 4:
+        return *(int32_t*) this->data;
+    case 5:
+        return (int32_t) (*(int16_t*) this->data);
+    case 8:
+        return (int32_t) (*(double*) this->data);
+    }
+    return 0;
+}
+
+uint32_t ObjectRecord::uintValue() {
+    switch (this->id) {
+    case 4:
+        return *(uint32_t*) this->data;
+    case 5:
+        return (uint32_t) (*(uint16_t*) this->data);
+    case 8:
+        return (uint32_t) (*(double*) this->data);
+    }
+    return 0;
+}
+
+double ObjectRecord::doubleValue() {
+    switch (this->id) {
+    case 4:
+        return (double) (*(int64_t*) this->data);
+    case 5:
+        return (double) (*(int16_t*) this->data);
+    case 8:
+        return *(double*) this->data;
+    }
+    return 0;
+}
+
 ScratchReader::ScratchReader(ByteStream* stream) {
 	this->stream = stream;
 }
@@ -192,11 +228,9 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		this->stream->readBlockR(data, length);
 		break;
 	case 5: // SmallInteger16
-		length = 4;
+		length = 2;
 		data = new char[length];
-		data[2] = 0;
-		data[3] = 0;
-		this->stream->readBlockR(data, 2);
+		this->stream->readBlockR(data, length);
 		break;
 	// long int stuff to come
 	case 8: // Float
