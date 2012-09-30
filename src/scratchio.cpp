@@ -235,6 +235,8 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 	// long int stuff to come
 	case 8: // Float
 		length = 8;
+		data = new char[length];
+		this->stream->readBlockR(data, length);
 		break;
 	case 9: // String
 	case 10: // Symbol

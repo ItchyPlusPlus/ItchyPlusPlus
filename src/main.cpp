@@ -60,7 +60,6 @@ int main(int argc, char** argv) {
 		SDL_LockSurface(screen);
 
 		cairo_t* cr = cairo_create(crs);
-		cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
 
 		cairo_set_source_rgb(cr, 255, 255, 255);
 		cairo_paint(cr);

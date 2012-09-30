@@ -16,13 +16,16 @@ Scriptable::Scriptable(ObjectRecord* record) {
 	uint32_t j = 0;
 	for (uint32_t i = 0; i < media->fieldCount; i++) {
 		if (media->fields[i]->id == 162) {
+            if (media->fields[i] == record->fields[11]) {
+                this->imageIndex = i;
+            }
 			this->images[j++] = new Image(media->fields[i]);
 		}
 	}
 }
 
 void Scriptable::drawOn(cairo_t* cr) {
-	this->images[0]->drawOn(cr);
+	this->images[this->imageIndex]->drawOn(cr);
 }
 
 
@@ -57,10 +60,12 @@ void Stage::drawOn(cairo_t* cr) {
 Sprite::Sprite(ObjectRecord* record, Stage* stage) : Scriptable(record) {
 	this->stage = stage;
 
-    this->x = record->fields[0]->fields[0]->doubleValue();
-    this->y = record->fields[0]->fields[1]->doubleValue();
+    this->x = record->fields[0]->fields[0]->doubleValue() - this->stage->centerx + this->images[this->imageIndex]->centerx;
+    this->y = this->stage->centery - record->fields[0]->fields[1]->doubleValue() - this->images[this->imageIndex]->centery;
 
-    this->rotation = record->fields[0]->doubleValue();
+    this->rotation = record->fields[14]->doubleValue() * M_PI / 180.0;
+
+    cout << this->rotation << endl;
 }
 
 void Sprite::drawOn(cairo_t* cr) {
@@ -98,6 +103,8 @@ Form::Form(ObjectRecord* record) {
 	this->height = record->fields[1]->uintValue();
 
 	this->depth = record->fields[2]->uintValue();
+
+    cout << (int)this->depth << endl;
 
 	uint32_t* bitmap;
 	if (record->fields[4]->id == 11) {

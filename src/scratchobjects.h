@@ -1,6 +1,7 @@
 #ifndef SCRATCHOBJECTS_H__
 #define SCRATCHOBJECTS_H__
 
+#include <math.h>
 #include <cairo/cairo.h>
 #include <sstream>
 
@@ -26,6 +27,7 @@ public:
 
 	Image** images;
 	uint32_t imageCount;
+    uint32_t imageIndex;
 };
 
 class Stage : public Scriptable {
@@ -33,11 +35,11 @@ public:
 	Stage(ObjectRecord*);
 
 	void drawOn(cairo_t*);
+	int32_t centerx;
+	int32_t centery;
 private:
 	Sprite** sprites;
 	uint32_t spriteCount;
-	int32_t centerx;
-	int32_t centery;
 };
 
 class Sprite : public Scriptable {
