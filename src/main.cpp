@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#include "scratchio.h"
+#include "Scratch1.x/scratchio.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
