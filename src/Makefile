@@ -1,5 +1,5 @@
-objects = main.o Scratch1.x/scratchio.o Scratch1.x/scratchobjects.o
-headers = Scratch1.x/scratchio.h Scratch1.x/scratchobjects.h
+objects = main.o scratchio.o scratchobjects.o
+headers = scratchio.h scratchobjects.h
 binary = itchy
 INSTALL_PATH?=/usr/local
 DESTDIR?=/
