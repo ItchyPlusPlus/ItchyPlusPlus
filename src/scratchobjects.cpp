@@ -51,9 +51,7 @@ void Stage::drawOn(cairo_t* cr) {
     cairo_translate(cr, this->centerx, this->centery);
 	Scriptable::drawOn(cr);
 
-	cout << "total sprites: "<< this->spriteCount << endl;
 	for (uint32_t i = 0; i < this->spriteCount; i++) {
-		cout << "drawing sprite: " << i << endl;
 		this->sprites[i]->drawOn(cr);
 	}
     cairo_restore(cr);
@@ -66,8 +64,6 @@ Sprite::Sprite(ObjectRecord* record, Stage* stage) : Scriptable(record) {
     this->y = this->stage->centery - record->fields[0]->fields[1]->doubleValue() - this->images[this->imageIndex]->centery;
 
     this->rotation = record->fields[14]->doubleValue() * M_PI / 180.0;
-
-    cout << this->rotation << endl;
 }
 
 void Sprite::drawOn(cairo_t* cr) {
@@ -105,8 +101,6 @@ Form::Form(ObjectRecord* record) {
 	this->height = record->fields[1]->uintValue();
 
 	this->depth = record->fields[2]->uintValue();
-
-    cout << (int)this->depth << endl;
 
 	uint32_t* bitmap;
 	if (record->fields[4]->id == 11) {
