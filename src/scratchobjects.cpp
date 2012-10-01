@@ -121,9 +121,11 @@ Form::Form(ObjectRecord* record) {
 uint32_t* Form::resizeBitmap(uint32_t* bitmap, uint32_t stride) {
 	uint32_t* newBitmap = new uint32_t[stride * this->height];
 
-	for (uint32_t i = 0; i < this->bitmapSize; i++) {
-		newBitmap[i] = bitmap[i];
-	}
+    if (this->depth == 32) {
+    	for (uint32_t i = 0; i < this->bitmapSize; i++) {
+            newBitmap[i] = bitmap[i];
+        }
+    }
 
 	return newBitmap;
 }
@@ -176,7 +178,7 @@ uint32_t Form::decodeInt(ByteStream* stream) {
 	if (i <= 223) {
 		return i;
 	} else if (i <= 254) {
-		return (i - 224) * 256 + stream->uint8();
+		return (i - 224) << 8 | stream->uint8();
 	}
 	return stream->uint32();
 }

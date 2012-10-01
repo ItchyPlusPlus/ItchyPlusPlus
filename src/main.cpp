@@ -16,15 +16,18 @@ const char* WINDOW_TITLE = "Itchy++";
 
 int main(int argc, char** argv) {
 	const char* PROJECT;
-	if(argc == 1)
-		PROJECT = "project.sb";
-	else
+	if(argc == 1) {
+		PROJECT = "__project.sb";
+	} else {
 		PROJECT = argv[1];
+	}
 
+    uint32_t start = SDL_GetTicks();
 	Stage* stage = openFromFile(PROJECT);
+	cout << "Read time: " << SDL_GetTicks() - start << "ms" << endl;
 
 
-	long long last = SDL_GetTicks();
+	uint32_t last = SDL_GetTicks();
 
 	//Start the window
 	SDL_Init(SDL_INIT_VIDEO);
@@ -79,7 +82,7 @@ int main(int argc, char** argv) {
 
 		SDL_Flip(screen);
 
-		SDL_Delay(1000/60);
+		SDL_Delay(1000/60.0);
 	}
 	SDL_Quit();
 	return 0;
