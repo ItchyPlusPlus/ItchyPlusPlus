@@ -2,7 +2,11 @@
 #define SCRATCHOBJECTS_H__
 
 #include <math.h>
+#ifdef __APPLE__
+#include "/opt/local/include/cairo/cairo.h"
+#else
 #include <cairo/cairo.h>
+#endif
 #include <sstream>
 
 

@@ -1,6 +1,10 @@
 #include <math.h>
 #include <SDL/SDL.h>
+#ifdef __APPLE__
+#include "/opt/local/include/cairo/cairo.h"
+#else
 #include <cairo/cairo.h>
+#endif
 #include <string>
 #include <sstream>
 #include <iostream>
