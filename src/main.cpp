@@ -21,7 +21,7 @@ const char* WINDOW_TITLE = "Itchy++";
 int main(int argc, char** argv) {
 	const char* PROJECT;
 	if(argc == 1) {
-		PROJECT = "__project.sb";
+		PROJECT = "project.sb";
 	} else {
 		PROJECT = argv[1];
 	}
