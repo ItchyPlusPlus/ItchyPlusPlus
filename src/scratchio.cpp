@@ -139,6 +139,10 @@ ScratchReader::ScratchReader(ByteStream* stream) {
 	this->stream = stream;
 }
 
+ScratchReader::~ScratchReader() {
+
+}
+
 
 Stage* ScratchReader::readProject() {
 	if (strcmp(this->stream->readString(10), "ScratchV02") == 0) {
@@ -327,8 +331,8 @@ Stage* openFromFile(const char* path) {
 
         return stage;
     }
-	cout << "Fatal Error: Unable to open file: " << path << endl;
-	exit(1);
+	cout << "Unable to open file: " << path << endl;
+	exit(0);
 	return NULL;
 }
 

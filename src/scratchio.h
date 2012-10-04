@@ -104,6 +104,7 @@ public:
 class ScratchReader {
 public:
 	ScratchReader(ByteStream*);
+	~ScratchReader();
 	Stage* readProject();
 	ObjectRecord* readObjectStore();
 	ObjectRecord* readObject();
