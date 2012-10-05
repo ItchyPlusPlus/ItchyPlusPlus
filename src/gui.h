@@ -1,9 +1,14 @@
-
 #ifndef GUI_H_
 #define GUI_H_
 
-#include <sstream>
+#include <SDL/SDL.h>
+#ifdef __APPLE__
+#include "/opt/local/include/cairo/cairo.h"
+#else
 #include <cairo/cairo.h>
+#endif
+#include <sstream>
+#include <math.h>
 
 using namespace std;
 
@@ -11,9 +16,8 @@ using namespace std;
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
-static const char* WINDOW_TITLE = "Itchy++";
 
-class Gui{
+class Gui {
 public:
 	Gui();
 	void init(Itchy*);
@@ -23,4 +27,4 @@ private:
 };
 
 
-#endif /* GUI_H_ */
+#endif

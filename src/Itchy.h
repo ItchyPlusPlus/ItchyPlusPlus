@@ -1,9 +1,14 @@
-#include "scratchio.h"
-
 #ifndef ITCHY_H_
 #define ITCHY_H_
 
-class Itchy{
+#include <SDL/SDL.h>
+
+class Itchy;
+
+#include "gui.h"
+#include "scratchio.h"
+
+class Itchy {
 public:
 	Itchy(int, char**);
 	Stage* getStage();
@@ -12,4 +17,4 @@ private:
 };
 
 
-#endif /* ITCHY_H_ */
+#endif
