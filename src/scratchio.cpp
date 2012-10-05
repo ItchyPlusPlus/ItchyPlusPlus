@@ -142,6 +142,11 @@ uint32_t ObjectRecord::colorValue() {
     return 0;
 }
 
+bool ObjectRecord::isNull() {
+    return this->id == 1;
+}
+
+
 ScratchReader::ScratchReader(ByteStream* stream) {
 	this->stream = stream;
 }

@@ -85,7 +85,11 @@ Media::Media(ObjectRecord* record) {
 
 
 Image::Image(ObjectRecord* record) : Media(record) {
-	this->form = new Form(record->fields[1]);
+    if (record->fieldCount >= 6 && !record->fields[5]->isNull()) {
+        this->form = new Form(record->fields[5]);
+    } else {
+        this->form = new Form(record->fields[1]);
+    }
 	this->centerx = record->fields[2]->fields[0]->intValue();
 	this->centery = record->fields[2]->fields[1]->intValue();
 }

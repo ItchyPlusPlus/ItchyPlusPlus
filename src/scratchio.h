@@ -95,6 +95,8 @@ public:
 
 	uint32_t colorValue();
 
+    bool isNull();
+
 	uint8_t id;
 	uint8_t version;
 	char* data;
