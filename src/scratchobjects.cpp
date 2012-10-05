@@ -1,5 +1,7 @@
 #include "scratchobjects.h"
 
+const uint32_t squeakColors[] = {0xffffff, 0x000000, 0xffffff, 0x808080, 0xff0000, 0x00ff00, 0x0000ff, 0x00ffff, 0xffff00, 0xff00ff, 0x202020, 0x404040, 0x606060, 0x9f9f9f, 0xbfbfbf, 0xdfdfdf, 0x080808, 0x101010, 0x181818, 0x282828, 0x303030, 0x383838, 0x484848, 0x505050, 0x585858, 0x686868, 0x707070, 0x787878, 0x878787, 0x8f8f8f, 0x979797, 0xa7a7a7, 0xafafaf, 0xb7b7b7, 0xc7c7c7, 0xcfcfcf, 0xd7d7d7, 0xe7e7e7, 0xefefef, 0xf7f7f7, 0x000000, 0x003300, 0x006600, 0x009900, 0x00cc00, 0x00ff00, 0x000033, 0x003333, 0x006633, 0x009933, 0x00cc33, 0x00ff33, 0x000066, 0x003366, 0x006666, 0x009966, 0x00cc66, 0x00ff66, 0x000099, 0x003399, 0x006699, 0x009999, 0x00cc99, 0x00ff99, 0x0000cc, 0x0033cc, 0x0066cc, 0x0099cc, 0x00cccc, 0x00ffcc, 0x0000ff, 0x0033ff, 0x0066ff, 0x0099ff, 0x00ccff, 0x00ffff, 0x330000, 0x333300, 0x336600, 0x339900, 0x33cc00, 0x33ff00, 0x330033, 0x333333, 0x336633, 0x339933};
+
 Scriptable::Scriptable(ObjectRecord* record) {
 	this->name = (char*) record->fields[6]->data;
 
@@ -109,18 +111,39 @@ Form::Form(ObjectRecord* record) {
 		bitmap = (uint32_t*) record->fields[4]->data;
 	}
 
+	if (record->fieldCount >= 6) {
+        ObjectRecord* colors = record->fields[5];
+        this->colors = new uint32_t[colors->fieldCount];
+        for (uint32_t i = 0; i < colors->fieldCount; i++) {
+            this->colors[i] = colors->fields[i]->colorValue();
+        }
+	}
+
 	int32_t stride = cairo_format_stride_for_width(CAIRO_FORMAT_ARGB32, this->width);
 
 	bitmap = this->resizeBitmap(bitmap, cairo_format_stride_for_width(CAIRO_FORMAT_ARGB32, this->width));
 
 	this->image = cairo_image_surface_create_for_data((uint8_t*) bitmap, CAIRO_FORMAT_ARGB32, this->width, this->height, stride);
-
-	//cout << cairo_status_to_string(cairo_surface_status(this->image)) << endl;
 }
 
 uint32_t* Form::resizeBitmap(uint32_t* bitmap, uint32_t stride) {
 	uint32_t* newBitmap = new uint32_t[stride * this->height];
 
+    if (this->depth <= 8) {
+        const uint32_t* colors = this->colors;
+        if (colors == NULL) {
+            colors = squeakColors;
+        }
+
+        uint32_t l = this->bitmapSize / this->height;
+        uint32_t i = (1 << this->depth) - 1;
+        uint32_t j = 32 / this->depth;
+        for(uint32_t y = 0; y < this->height; y++) {
+            for(uint32_t x = 0; x < this->width; x++) {
+                newBitmap[y * this->width + x] = colors[(bitmap[y * l + (x - (x % j)) / j] / (1 << this->depth * (j - x % j - 1))) & i];
+            }
+        }
+    }
     if (this->depth == 32) {
     	for (uint32_t i = 0; i < this->bitmapSize; i++) {
             newBitmap[i] = bitmap[i];

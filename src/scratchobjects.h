@@ -92,7 +92,11 @@ private:
 
 	uint8_t depth;
 
+	uint32_t* colors;
+
 	uint32_t bitmapSize;
 };
+
+extern const uint32_t squeakColors[];
 
 #endif

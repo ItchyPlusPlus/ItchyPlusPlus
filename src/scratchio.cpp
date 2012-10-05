@@ -135,6 +135,13 @@ double ObjectRecord::doubleValue() {
     return 0;
 }
 
+uint32_t ObjectRecord::colorValue() {
+    if (this->id == 30 || this->id == 31) {
+        return *(uint32_t*) this->data;
+    }
+    return 0;
+}
+
 ScratchReader::ScratchReader(ByteStream* stream) {
 	this->stream = stream;
 }
@@ -219,6 +226,7 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 	uint32_t fieldCount = 0;
 
 	char* data = NULL;
+	uint32_t color;
 
 	switch (id) {
 	case 1: // Nil
@@ -294,9 +302,23 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		break;
 	case 30: // Color
 		length = 4;
+		data = new char[length];
+		this->stream->readBlockR(data, length);
+		color = *(uint32_t*) data;
+		data[0] = color >> 2 & 0xFF;
+		data[1] = color >> 12 & 0xFF;
+		data[2] = color >> 22 & 0xFF;
+		data[3] = 0xff;
 		break;
 	case 31: // TranslucentColor
-		length = 5;
+		length = 4;
+		data = new char[4];
+		this->stream->readBlockR(data, 4);
+		color = *(uint32_t*) data;
+		data[0] = color >> 2 & 0xFF;
+		data[1] = color >> 12 & 0xFF;
+		data[2] = color >> 22 & 0xFF;
+		data[3] = this->stream->uint8();
 		break;
 	case 99: // ObjectRef
 		length = 4;

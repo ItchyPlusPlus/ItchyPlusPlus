@@ -93,6 +93,8 @@ public:
 	uint32_t uintValue();
 	double doubleValue();
 
+	uint32_t colorValue();
+
 	uint8_t id;
 	uint8_t version;
 	char* data;
