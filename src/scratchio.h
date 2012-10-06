@@ -36,6 +36,37 @@
 #define htole64(x) __builtin_bswap64 (x)
 #endif
 #endif /* __BYTE_ORDER == __BIG_ENDIAN */
+#elif _WIN32 || _WIN64  // windows case
+#ifndef be32toh
+#define be32toh(x) __builtin_bswap32 (x)
+#endif
+#ifndef htobe32
+#define htobe32(x) __builtin_bswap32 (x)
+#endif
+#ifndef be64toh
+#define be64toh(x) __builtin_bswap64 (x)
+#endif
+#ifndef htobe64
+#define htobe64(x) __builtin_bswap64 (x)
+#endif
+#ifndef le16toh
+#define le16toh(x) __builtin_bswap16 (x)
+#endif
+#ifndef htole16
+#define htole16(x) __builtin_bswap16 (x)
+#endif
+#ifndef le32toh
+#define le32toh(x) __builtin_bswap32 (x)
+#endif
+#ifndef htole32
+#define htole32(x) __builtin_bswap32 (x)
+#endif
+#ifndef le64toh
+#define le64toh(x) __builtin_bswap64 (x)
+#endif
+#ifndef htole64
+#define htole64(x) __builtin_bswap64 (x)
+#endif
 #else
 #include <endian.h>
 #endif
