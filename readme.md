@@ -18,12 +18,13 @@ Then compiling is just as simple as this:
 
     cd src
     make
-    
+    [sudo] make install
+
 Make sure there is a 
     project.sb 
 in the directory you are running it from or pass a path to a project file when you run it:
 
-    src/itchy ~/Documents/Scatch\ Projects\test.sb
+    itchy ~/Documents/Scatch\ Projects\test.sb
     
 It currently is in very early stages so it might fail.  If you want to help please submit a pull request.
 
