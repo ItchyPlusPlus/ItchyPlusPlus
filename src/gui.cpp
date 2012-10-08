@@ -13,7 +13,7 @@ void Gui::init(Itchy* context) {
 
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Surface* screen = SDL_SetVideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 0, SDL_HWSURFACE | SDL_DOUBLEBUF);
-    SDL_WM_SetCaption("Itchy++", 0);
+    SDL_WM_SetCaption("Itchy++ Dev", 0);
   
 
     SDL_Event event;
