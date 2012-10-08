@@ -250,11 +250,13 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		this->stream->readBlockR(data, length);
 		break;
 	case 6: //LargePositiveInteger
+		//Not sure if it is 6.
 		length = 6;
 		data = new char[length];
 		this->stream->readBlockR(data, length);
 		break;
 	case 7: //LargeNegativeInteger
+		//Not sure if it is 7.
 		length = 7;
 		data = new char[length];
 		this->stream->readBlockR(data, length);
