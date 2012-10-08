@@ -14,8 +14,8 @@ using namespace std;
 
 #include "Itchy.h"
 
-const int WINDOW_WIDTH = 640;
-const int WINDOW_HEIGHT = 480;
+const int WINDOW_WIDTH = 480;
+const int WINDOW_HEIGHT = 360;
 
 class Gui {
 public:

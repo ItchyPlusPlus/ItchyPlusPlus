@@ -249,6 +249,16 @@ ObjectRecord* ScratchReader::readFixedFormat(uint8_t id) {
 		data = new char[length];
 		this->stream->readBlockR(data, length);
 		break;
+	case 6: //LargePositiveInteger
+		length = 6;
+		data = new char[length];
+		this->stream->readBlockR(data, length);
+		break;
+	case 7: //LargeNegativeInteger
+		length = 7;
+		data = new char[length];
+		this->stream->readBlockR(data, length);
+		break;
 	// long int stuff to come
 	case 8: // Float
 		length = 8;
