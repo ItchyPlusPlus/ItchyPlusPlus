@@ -1,17 +1,18 @@
 objects = scratchio.o scratchobjects.o
+sources = scratchio.cpp scratchobjects.cpp
 headers = scratchio.h scratchobjects.h
-binary = itchy
+static = libscratchio.a
 INSTALL_PATH?=/usr/local
 DESTDIR?=/
 
-$(binary): $(objects) 
-	g++ -o $@ $(objects)
+lib: $(objects)
+	ar rcs $(static) $(objects)
 
 $(objects): $(headers)
 
 .PHONY: clean
 clean:
-	rm -f $(objects) $(binary)
+	rm -f $(objects) $(static)
 
 .PHONY: install
 install: $(binary)
