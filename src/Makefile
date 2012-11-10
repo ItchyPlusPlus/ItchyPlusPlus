@@ -3,9 +3,10 @@ headers = scratchio.h scratchobjects.h gui.h Itchy.h
 binary = itchy
 INSTALL_PATH?=/usr/local
 DESTDIR?=/
+MYLIBRARIES=-lcairo -lSDLmain -lSDL
 
 $(binary): $(objects) 
-	g++ -o $@ $(objects) `pkg-config --cflags --libs cairo` `sdl-config --cflags --libs`
+	g++ -o $@ $(objects) $(MYLIBRARIES)
 
 $(objects): $(headers)
 
