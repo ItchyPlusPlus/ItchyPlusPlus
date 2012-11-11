@@ -6,7 +6,7 @@
 class Itchy;
 
 #include "gui.h"
-#include "scratchio.h"
+#include "scratchio/scratchio.h"
 
 class Itchy {
 public:
