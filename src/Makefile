@@ -5,7 +5,8 @@ INSTALL_PATH?=/usr/local
 DESTDIR?=/
 
 $(binary): $(objects) 
-	g++ -o $@ $(objects) `pkg-config --cflags --libs cairo` `sdl-config --cflags --libs`
+	$(MAKE) -C scratchio
+	g++ -o $@ $(objects) `pkg-config --cflags --libs cairo` `sdl-config --cflags --libs` scratchio/libscratchio.a
 
 $(objects): $(headers)
 
