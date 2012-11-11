@@ -28,6 +28,9 @@ in the directory you are running it from or pass a path to a project file when y
     
 It currently is in very early stages so it might fail.  If you want to help please submit a pull request.
 
+to cleanup the directory once you have built and run make install type:
+    make clean
+
 # Wiki
 
 Be sure to look at our wiki for more info! It should be at: http://github.com/ItchyPlusPlus/ItchyPlusPlus/wiki
