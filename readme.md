@@ -20,9 +20,7 @@ Then compiling is just as simple as this:
     make
     [sudo] make install
 
-Make sure there is a 
-    project.sb 
-in the directory you are running it from or pass a path to a project file when you run it:
+Make sure there is a `project.sb` in the directory you are running it from or pass a path to a project file when you run it:
 
     itchy ~/Documents/Scatch\ Projects\test.sb
     
@@ -30,6 +28,13 @@ It currently is in very early stages so it might fail.  If you want to help plea
 
 to cleanup the directory once you have built and run make install type:
     make clean
+
+## Arch Linux
+If you use arch then just run these two commands in the downloads directory
+    
+    $ makepkg -s
+    # packman -U *.tar.xz
+
 
 # Wiki
 
