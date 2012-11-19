@@ -2,7 +2,7 @@
 pkgname=itchy-git
 pkgver=VERSION
 pkgrel=0
-pkgdesc=""
+pkgdesc="A C++ Scratch Port"
 arch=('i686' 'x86_64')
 url="http://github.com/ItchyPlusPlus/ItchyPlusPlus"
 license=('GPL')
