@@ -1,6 +1,6 @@
+script: ./travisbuild.sh
 language: cpp
 compiler:
   - gcc
   - clang
 # Change this to your needs
-script: ./travisbuild.sh
