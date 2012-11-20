@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ItchyPlusPlus/ItchyPlusPlus.png)](https://travis-ci.org/ItchyPlusPlus/ItchyPlusPlus)
+
 Welcome to the Itchy++ repository!
 Itchy++ is a Scratch-like program made in C++.
 
