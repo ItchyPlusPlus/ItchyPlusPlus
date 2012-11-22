@@ -1,6 +1,6 @@
 language: cpp
 compiler: gcc
 install: sudo apt-get install libcairo2-dev libsdl1.2-dev -y
-script: make -f src/Makefile
+script: cd src; make
 # Change this to your needs
 
