@@ -1,4 +1,4 @@
-script: ./travisbuild.sh
+script: make -f src/Makefile travis
 language: cpp
 compiler:
   - gcc
