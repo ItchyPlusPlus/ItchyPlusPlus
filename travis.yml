@@ -1,6 +1,6 @@
-script: make -f src/Makefile travis
 language: cpp
-compiler:
-  - gcc
-  - clang
+compiler: gcc
+install: sudo apt-get install libcairo2-dev libsdl1.2-dev -y
+script: make -f src/Makefile
 # Change this to your needs
+
