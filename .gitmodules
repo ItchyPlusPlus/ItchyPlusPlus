@@ -3,4 +3,4 @@
 	url = https://github.com/ItchyPlusPlus/IPPX.git
 [submodule "Tests"]
 	path = Tests
-	url = git://github.com/ItchyPlusPlus/Tests.git
+	url = https://github.com/ItchyPlusPlus/Tests.git
