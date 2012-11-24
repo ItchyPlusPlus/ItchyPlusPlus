@@ -1,3 +1,6 @@
 [submodule "src/IPPX"]
 	path = src/IPPX
 	url = https://github.com/ItchyPlusPlus/IPPX.git
+[submodule "Tests"]
+	path = Tests
+	url = git://github.com/ItchyPlusPlus/Tests.git
