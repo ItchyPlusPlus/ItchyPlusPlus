@@ -1,12 +1,12 @@
 objects = main.o Itchy.o gui.o
-headers = gui.h Itchy.h
+headers = gui.h Itchy.h ui_MainWindows.h
 binary = itchy
 INSTALL_PATH?=/usr/local
 DESTDIR?=/
 
 $(binary): $(objects) 
 	$(MAKE) -C scratchio
-	g++ -o $@ $(objects) `pkg-config --cflags --libs cairo` `sdl-config --cflags --libs` scratchio/libscratchio.a
+	g++ -o $@ $(objects) `pkg-config --cflags --libs cairo` `sdl-config --cflags --libs` scratchio/libscratchio.a -lQtCore -lQtGui
 
 $(objects): $(headers)
 
