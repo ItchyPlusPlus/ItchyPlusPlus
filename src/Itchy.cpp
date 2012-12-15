@@ -1,6 +1,4 @@
 #include "Itchy.h"
-#include <iostream>
-#include "ui_MainWindows.h"
 
 Itchy::Itchy(int argc, char** argv) {
 	const char* PROJECT;
@@ -14,13 +12,8 @@ Itchy::Itchy(int argc, char** argv) {
     this->stage = openFromFile(PROJECT);
     cout << "Read time: " << SDL_GetTicks() - start << "ms" << endl;
 
-    QApplication app(argc, argv);
-        QMainWindow *window = new QMainWindow;
-        Ui::MainWindow ui;
-        ui.setupUi(window);
-
-        window->show();
-        app.exec();
+    Gui gui;
+    gui.init(this);
 }
 
 Stage* Itchy::getStage() {

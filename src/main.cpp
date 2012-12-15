@@ -1,9 +1,7 @@
 using namespace std;
 #include "Itchy.h"
 
-/**
- * this is a <b>test</b>
- */
+
 int main(int argc, char** argv) {
 	cout << "Itchy++ v0.0(dev)" << endl;
 
