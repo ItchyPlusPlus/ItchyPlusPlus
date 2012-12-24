@@ -18,3 +18,8 @@ SOURCES += main.cpp\
 HEADERS  += itchy.h
 
 FORMS    += itchy.ui
+
+OTHER_FILES +=
+
+RESOURCES += \
+    itchy.qrc
