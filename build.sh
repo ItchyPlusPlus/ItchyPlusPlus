@@ -1,5 +1,3 @@
-echo !build.sh! cd into src/
-cd src/
 echo !build.sh! make clean
 make clean
 echo !build.sh! make
