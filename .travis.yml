@@ -1,6 +1,6 @@
 language: cpp
 compiler: gcc
-install: sudo apt-get install libcairo2-dev libsdl1.2-dev -y
+install: sudo apt-get install libqt4-dev qt4-qmake
 script: cd src; make
 # Change this to your needs
 
