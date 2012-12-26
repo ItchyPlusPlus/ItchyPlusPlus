@@ -12,12 +12,18 @@ TARGET = ItchyPlusPlus
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        itchy.cpp
+SOURCES += src/main.cpp\
+        src/itchy.cpp
 
-HEADERS  += itchy.h
+HEADERS  += src/itchy.h
 
 FORMS    += itchy.ui
+
+DESTDIR = build
+OBJECTS_DIR = build/obj
+MOC_DIR = build/moc
+RCC_DIR = build/rcc
+UI_DIR = build/ui
 
 OTHER_FILES +=
 
