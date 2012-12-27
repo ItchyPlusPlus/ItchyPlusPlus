@@ -30,3 +30,8 @@ void itchy::on_actionHelp_triggered() {
 void itchy::on_actionAbout_triggered() {
 	QMessageBox::about(NULL, "Itchy++ | About", "Insert about here");
 }
+
+void itchy::on_actionOpen_triggered() {
+	QMessageBox::information(NULL, "Itchy++ | Open",
+			"Feature not implemented yet!");
+}
