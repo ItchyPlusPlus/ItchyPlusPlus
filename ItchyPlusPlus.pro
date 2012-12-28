@@ -1,9 +1,3 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2012-12-24T07:55:01
-#
-#-------------------------------------------------
-
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -12,10 +6,9 @@ TARGET = ItchyPlusPlus
 TEMPLATE = app
 
 
-SOURCES += src/main.cpp\
-        src/itchy.cpp
+SOURCES += src/*.cpp\
 
-HEADERS  += src/itchy.h
+HEADERS  += src/*.h
 
 FORMS    += itchy.ui
 

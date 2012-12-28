@@ -23,7 +23,7 @@
          <bool>true</bool>
         </property>
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -65,7 +65,7 @@
             <number>5</number>
            </property>
            <property name="sizeConstraint">
-            <enum>QLayout::SetDefaultConstraint</enum>
+            <enum>QLayout::SetNoConstraint</enum>
            </property>
            <property name="bottomMargin">
             <number>0</number>
@@ -78,7 +78,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_log_in">
+            <widget class="QLabel" name="label_file_menu">
              <property name="styleSheet">
               <string notr="true">color: white;
 font: 75 9pt &quot;Sans Serif&quot;;</string>
@@ -148,7 +148,10 @@ font: 75 9pt &quot;Sans Serif&quot;;</string>
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="log_in_lable">
+            <widget class="QLabel" name="label_log_in">
+             <property name="mouseTracking">
+              <bool>true</bool>
+             </property>
              <property name="text">
               <string>log in</string>
              </property>
@@ -233,4 +236,7 @@ font: 75 9pt &quot;Sans Serif&quot;;</string>
   <include location="itchy.qrc"/>
  </resources>
  <connections/>
+ <slots>
+  <slot>on_action_label_fil_menu_hovered()</slot>
+ </slots>
 </ui>

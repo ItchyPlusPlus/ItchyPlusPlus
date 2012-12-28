@@ -26,8 +26,14 @@ private slots:
 
     void on_actionOpen_triggered();
 
+
+    void label_edit_menu_hovered();
+
 private:
     Ui::itchy *ui;
+
+protected:
+    bool eventFilter(QObject *obj, QEvent *event);
 };
 
 #endif // ITCHY_H
