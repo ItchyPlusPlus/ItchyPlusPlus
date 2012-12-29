@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1176</width>
+    <width>1103</width>
     <height>747</height>
    </rect>
   </property>
@@ -17,13 +17,29 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <layout class="QGridLayout" name="gridlayout_main_layout">
-      <item row="0" column="0">
+      <item row="4" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Expanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>650</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="3" column="0">
        <widget class="QFrame" name="frame_top_menubar">
         <property name="enabled">
          <bool>true</bool>
         </property>
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -31,13 +47,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>28</height>
+          <height>10</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
-          <height>28</height>
+          <width>10000000</width>
+          <height>35</height>
          </size>
         </property>
         <property name="baseSize">
@@ -67,11 +83,20 @@
            <property name="sizeConstraint">
             <enum>QLayout::SetNoConstraint</enum>
            </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
            <property name="bottomMargin">
             <number>0</number>
            </property>
            <item>
             <widget class="QLabel" name="label_itchy_logo">
+             <property name="minimumSize">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
              <property name="text">
               <string>Itchy++</string>
              </property>
@@ -79,6 +104,12 @@
            </item>
            <item>
             <widget class="QLabel" name="label_file_menu">
+             <property name="minimumSize">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">color: white;
 font: 75 9pt &quot;Sans Serif&quot;;</string>
@@ -90,6 +121,12 @@ font: 75 9pt &quot;Sans Serif&quot;;</string>
            </item>
            <item>
             <widget class="QLabel" name="label_edit_menu">
+             <property name="minimumSize">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">color: white;</string>
              </property>
@@ -100,6 +137,12 @@ font: 75 9pt &quot;Sans Serif&quot;;</string>
            </item>
            <item>
             <widget class="QLabel" name="label_tips_menu">
+             <property name="minimumSize">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">color:white;</string>
              </property>
@@ -149,11 +192,17 @@ font: 75 9pt &quot;Sans Serif&quot;;</string>
            </item>
            <item>
             <widget class="QLabel" name="label_log_in">
+             <property name="minimumSize">
+              <size>
+               <width>10</width>
+               <height>10</height>
+              </size>
+             </property>
              <property name="mouseTracking">
               <bool>true</bool>
              </property>
              <property name="text">
-              <string>log in</string>
+              <string>Log In</string>
              </property>
             </widget>
            </item>
@@ -162,49 +211,19 @@ font: 75 9pt &quot;Sans Serif&quot;;</string>
         </layout>
        </widget>
       </item>
-      <item row="1" column="0">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </item>
    </layout>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <action name="actionScratch_Project">
+  <action name="actionAbout">
    <property name="text">
-    <string>Scratch Project</string>
+    <string>About</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+O</string>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
   <action name="actionItchy_Project">
@@ -215,14 +234,12 @@ font: 75 9pt &quot;Sans Serif&quot;;</string>
     <string>Ctrl+I</string>
    </property>
   </action>
-  <action name="actionHelp">
+  <action name="actionScratch_Project">
    <property name="text">
-    <string>Help</string>
+    <string>Scratch Project</string>
    </property>
-  </action>
-  <action name="actionAbout">
-   <property name="text">
-    <string>About</string>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
   <action name="actionOpen">
@@ -232,9 +249,7 @@ font: 75 9pt &quot;Sans Serif&quot;;</string>
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="itchy.qrc"/>
- </resources>
+ <resources/>
  <connections/>
  <slots>
   <slot>on_action_label_fil_menu_hovered()</slot>
