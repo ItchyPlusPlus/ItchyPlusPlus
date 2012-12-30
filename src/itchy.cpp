@@ -1,4 +1,6 @@
 #include <QMessageBox>
+#include <qmenu.h>
+#include <qaction.h>
 
 #include <iostream>
 
@@ -12,6 +14,10 @@ itchy::itchy(QWidget *parent) :
 	ui->label_edit_menu->installEventFilter(this);
 	ui->label_tips_menu->installEventFilter(this);
 	ui->label_file_menu->installEventFilter(this);
+	menu = new QMenu();
+	QAction *test = new QAction(tr("&test"), this);
+	menu->addAction(test);
+
 }
 
 itchy::~itchy() {
@@ -51,6 +57,10 @@ bool itchy::eventFilter(QObject *obj, QEvent *event){
 	if(obj == ui->label_edit_menu || obj == ui->label_tips_menu || obj == ui->label_file_menu){
 		QLabel *label = qobject_cast<QLabel *>(obj);
 		switch (event->type()) {
+			case 2://mouse press
+				menu->move(label->mapToGlobal(label->geometry().bottomRight()));
+				menu->show();
+				break;
 			case 10://mouse enter
 				label->setStyleSheet("color:orange;");
 				break;

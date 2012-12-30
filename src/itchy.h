@@ -31,6 +31,7 @@ private slots:
 
 private:
     Ui::itchy *ui;
+    QMenu *menu;
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);

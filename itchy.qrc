@@ -2,4 +2,8 @@
     <qresource prefix="/icons">
         <file>res/gf.png</file>
     </qresource>
+    
+    <qresource prefix="/logos">
+        <file>res/splash.png</file>
+    </qresource>
 </RCC>
