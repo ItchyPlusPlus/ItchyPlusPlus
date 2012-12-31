@@ -7,60 +7,52 @@
 #include "itchy.h"
 #include "ui_itchy.h"
 
-itchy::itchy(QWidget *parent) :
-		QMainWindow(parent), ui(new Ui::itchy) {
+itchy::itchy(QWidget *parent) : QMainWindow(parent), ui(new Ui::itchy) {
 	ui->setupUi(this);
 
 	ui->label_edit_menu->installEventFilter(this);
 	ui->label_tips_menu->installEventFilter(this);
 	ui->label_file_menu->installEventFilter(this);
-	menu = new QMenu();
-	QAction *test = new QAction(tr("&test"), this);
-	menu->addAction(test);
-
+    //declares the menu and the actions for adding
+    menu = new QMenu();
+    editTest = new QAction(tr("&Edit menu"), this);
+    tipTest = new QAction(tr("&Tips menu"), this);
+    open = new QAction(tr("&Open"), this);
 }
 
 itchy::~itchy() {
 	delete ui;
 }
 
-void itchy::on_actionScratch_Project_triggered() {
-	QMessageBox::information(NULL, "Itchy++ | Open Scratch Project",
-			"Feature not implemented yet!");
-}
-
-void itchy::on_actionItchy_Project_triggered() {
-	QMessageBox::information(NULL, "Itchy++ | Open Itchy Project",
-			"Feature not implemented yet!");
-}
-
-void itchy::on_actionHelp_triggered() {
-	QMessageBox::information(NULL, "Itchy++ | Help",
-			"Feature not implemented yet!");
-}
-
-void itchy::on_actionAbout_triggered() {
-	QMessageBox::about(NULL, "Itchy++ | About", "Insert about here");
-}
-
-void itchy::on_actionOpen_triggered() {
-	QMessageBox::information(NULL, "Itchy++ | Open",
-			"Feature not implemented yet!");
-}
-
 void itchy::label_edit_menu_hovered() {
-std::cout << "file!";
+    std::cout << "file!" << std::endl;
 }
 
-bool itchy::eventFilter(QObject *obj, QEvent *event){
+bool itchy::eventFilter(QObject *obj, QEvent *event) {
 
-	if(obj == ui->label_edit_menu || obj == ui->label_tips_menu || obj == ui->label_file_menu){
+    if(obj == ui->label_edit_menu || obj == ui->label_tips_menu || obj == ui->label_file_menu) {
 		QLabel *label = qobject_cast<QLabel *>(obj);
+
 		switch (event->type()) {
 			case 2://mouse press
-				menu->move(label->mapToGlobal(label->geometry().bottomRight()));
+                if(label == ui->label_edit_menu) {
+                    menu->removeAction(tipTest);
+                    menu->removeAction(open);
+                    menu->addAction(editTest);
+                }
+                if(label == ui->label_tips_menu) {
+                    menu->removeAction(open);
+                    menu->removeAction(editTest);
+                    menu->addAction(tipTest);
+                }
+                if(label == ui->label_file_menu){
+                    menu->removeAction(tipTest);
+                    menu->removeAction(editTest);
+                    menu->addAction(open);
+                }
+                menu->move(label->mapToGlobal(label->geometry().bottomLeft()));
 				menu->show();
-				break;
+                break;
 			case 10://mouse enter
 				label->setStyleSheet("color:orange;");
 				break;

@@ -14,9 +14,9 @@ int main(int argc, char *argv[]) {
 	splash->show();
 
 	itchy w;
-	w.show();
+    w.show();
 
-	splash->hide();
+    splash->hide();
 
 	return a.exec();
 }

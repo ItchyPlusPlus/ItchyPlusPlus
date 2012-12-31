@@ -16,22 +16,15 @@ public:
     ~itchy();
     
 private slots:
-    void on_actionScratch_Project_triggered();
-
-    void on_actionItchy_Project_triggered();
-
-    void on_actionHelp_triggered();
-
-    void on_actionAbout_triggered();
-
-    void on_actionOpen_triggered();
-
 
     void label_edit_menu_hovered();
 
 private:
     Ui::itchy *ui;
     QMenu *menu;
+    QAction *editTest;
+    QAction *tipTest;
+    QAction *open;
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
