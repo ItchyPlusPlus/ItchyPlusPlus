@@ -16,7 +16,6 @@ itchy::itchy(QWidget *parent) : QMainWindow(parent), ui(new Ui::itchy) {
     //declares the menu and the actions for adding
     menu = new QMenu();
     editTest = new QAction(tr("&Edit menu"), this);
-    tipTest = new QAction(tr("&Tips menu"), this);
     open = new QAction(tr("&Open"), this);
 }
 
@@ -36,17 +35,14 @@ bool itchy::eventFilter(QObject *obj, QEvent *event) {
 		switch (event->type()) {
 			case 2://mouse press
                 if(label == ui->label_edit_menu) {
-                    menu->removeAction(tipTest);
                     menu->removeAction(open);
                     menu->addAction(editTest);
                 }
                 if(label == ui->label_tips_menu) {
-                    menu->removeAction(open);
-                    menu->removeAction(editTest);
-                    menu->addAction(tipTest);
+                    std::cout << "open tips pane" << std::endl;
+                    break;
                 }
                 if(label == ui->label_file_menu){
-                    menu->removeAction(tipTest);
                     menu->removeAction(editTest);
                     menu->addAction(open);
                 }
