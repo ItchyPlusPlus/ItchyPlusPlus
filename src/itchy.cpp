@@ -39,7 +39,7 @@ bool itchy::eventFilter(QObject *obj, QEvent *event) {
                     menu->addAction(editTest);
                 }
                 if(label == ui->label_tips_menu) {
-                    std::cout << "open tips pane" << std::endl;
+                    QMessageBox::about(this, "Itchy++ Tips","About and Help goes here");
                     break;
                 }
                 if(label == ui->label_file_menu){
