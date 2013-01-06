@@ -37,6 +37,8 @@ bool itchy::eventFilter(QObject *obj, QEvent *event) {
                 if(label == ui->label_edit_menu) {
                     menu->removeAction(open);
                     menu->addAction(editTest);
+                    p.setX(label->geometry().bottomLeft().x() - 100);
+                    p.setY(label->geometry().bottomLeft().y());
                 }
                 if(label == ui->label_tips_menu) {
                     QMessageBox::about(this, "Itchy++ Tips","About and Help goes here");
@@ -45,8 +47,10 @@ bool itchy::eventFilter(QObject *obj, QEvent *event) {
                 if(label == ui->label_file_menu){
                     menu->removeAction(editTest);
                     menu->addAction(open);
+                    p.setX(label->geometry().bottomLeft().x() - 60);
+                    p.setY(label->geometry().bottomLeft().y());
                 }
-                menu->move(label->mapToGlobal(label->geometry().bottomLeft()));
+                menu->move(label->mapToGlobal(p));
 				menu->show();
                 break;
 			case 10://mouse enter

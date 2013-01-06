@@ -25,6 +25,7 @@ private:
     QAction *editTest;
     QAction *tipTest;
     QAction *open;
+    QPoint p;
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
