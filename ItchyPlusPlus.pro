@@ -9,7 +9,7 @@ TEMPLATE = app
 SOURCES += src/*.cpp\
 
 HEADERS  += src/itchy.h\
-			src/guiobjects.h
+                        src/guiobjects.h
 
 FORMS    += itchy.ui
 
