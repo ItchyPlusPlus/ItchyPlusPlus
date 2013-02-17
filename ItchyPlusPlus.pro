@@ -8,10 +8,12 @@ TEMPLATE = app
 
 SOURCES += src/itchy.cpp\
             src/guiobjects.cpp\
-            src/main.cpp
+            src/main.cpp \
+    src/mainpane.cpp
 
 HEADERS  += src/itchy.h\
-                        src/guiobjects.h
+                        src/guiobjects.h \
+    src/mainpane.h
 
 FORMS    += itchy.ui
 

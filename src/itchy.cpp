@@ -6,6 +6,7 @@
 
 #include "itchy.h"
 #include "ui_itchy.h"
+#include "mainpane.h"
 
 itchy::itchy(QWidget *parent) : QMainWindow(parent), ui(new Ui::itchy) {
 	ui->setupUi(this);
@@ -17,6 +18,11 @@ itchy::itchy(QWidget *parent) : QMainWindow(parent), ui(new Ui::itchy) {
     menu = new QMenu();
     editTest = new QAction(tr("&Edit menu"), this);
     open = new QAction(tr("&Open"), this);
+
+    pane = new MainPane;
+
+    ui->gridlayout_main_layout->removeItem(ui->verticalSpacer);
+    ui->gridlayout_main_layout->addWidget(pane);
 }
 
 itchy::~itchy() {

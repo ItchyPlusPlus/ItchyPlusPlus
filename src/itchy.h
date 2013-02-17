@@ -2,6 +2,7 @@
 #define ITCHY_H
 
 #include <QMainWindow>
+#include "mainpane.h"
 
 namespace Ui {
 class itchy;
@@ -26,6 +27,7 @@ private:
     QAction *tipTest;
     QAction *open;
     QPoint p;
+    MainPane *pane;
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
