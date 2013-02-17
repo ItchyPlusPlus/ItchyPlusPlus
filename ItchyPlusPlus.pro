@@ -6,7 +6,9 @@ TARGET = ItchyPlusPlus
 TEMPLATE = app
 
 
-SOURCES += src/*.cpp\
+SOURCES += src/itchy.cpp\
+            src/guiobjects.cpp\
+            src/main.cpp
 
 HEADERS  += src/itchy.h\
                         src/guiobjects.h
