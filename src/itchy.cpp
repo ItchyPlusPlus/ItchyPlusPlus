@@ -46,16 +46,18 @@ bool itchy::eventFilter(QObject *obj, QEvent *event) {
                     p.setX(label->geometry().bottomLeft().x() - 100);
                     p.setY(label->geometry().bottomLeft().y());
                 }
+
                 if(label == ui->label_tips_menu) {
                     QMessageBox::about(this, "Itchy++ Tips","About and Help goes here");
-                    break;
                 }
+
                 if(label == ui->label_file_menu){
                     menu->removeAction(editTest);
                     menu->addAction(open);
                     p.setX(label->geometry().bottomLeft().x() - 60);
                     p.setY(label->geometry().bottomLeft().y());
                 }
+
                 menu->move(label->mapToGlobal(p));
 				menu->show();
                 break;
