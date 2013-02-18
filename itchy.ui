@@ -29,6 +29,9 @@
     </property>
     <item>
      <layout class="QGridLayout" name="gridlayout_main_layout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
       <item row="4" column="0">
        <spacer name="verticalSpacer">
         <property name="orientation">
