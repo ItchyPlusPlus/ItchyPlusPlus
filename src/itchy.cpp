@@ -1,4 +1,5 @@
 #include <QMessageBox>
+#include <QFileDialog>
 #include <qmenu.h>
 #include <qaction.h>
 
@@ -14,23 +15,50 @@ itchy::itchy(QWidget *parent) : QMainWindow(parent), ui(new Ui::itchy) {
 	ui->label_edit_menu->installEventFilter(this);
 	ui->label_tips_menu->installEventFilter(this);
 	ui->label_file_menu->installEventFilter(this);
-    //declares the menu and the actions for adding
-    menu = new QMenu();
-    editTest = new QAction(tr("&Edit menu"), this);
-    open = new QAction(tr("&Open"), this);
+    //Creates menu objects
+    menuFile = new QMenu();
+    menuEdit = new QMenu();
+
+    //Creates button objects
+    //FILE MENU
+    btnNew = new QAction(tr("&New"), this);
+    btnOpen = new QAction(tr("&Open"), this);
+    btnSave = new QAction(tr("&Save"), this);
+
+    //EDIT MENU
+
+
+    //Adds buttons to menus
+    menuFile->addAction(btnNew);
+    menuFile->addAction(btnOpen);
+    menuFile->addAction(btnSave);
 
     pane = new MainPane;
 
     ui->gridlayout_main_layout->removeItem(ui->verticalSpacer);
     ui->gridlayout_main_layout->addWidget(pane);
+
+    //Connects Actions to their slots
+    connect(btnOpen, SIGNAL(triggered()), SLOT(openFile()));
+    connect(btnNew, SIGNAL(triggered()), SLOT(newFile()));
+    connect(btnSave, SIGNAL(triggered()), SLOT(saveFile()));
 }
 
 itchy::~itchy() {
 	delete ui;
 }
 
-void itchy::label_edit_menu_hovered() {
-    std::cout << "file!" << std::endl;
+void itchy::openFile() {
+    projectFileName = QFileDialog::getOpenFileName(this);
+    //Open logic here
+}
+
+void itchy::newFile() {
+    //New file stuff here
+}
+
+void itchy::saveFile() {
+    //Save file stuff here
 }
 
 bool itchy::eventFilter(QObject *obj, QEvent *event) {
@@ -41,10 +69,10 @@ bool itchy::eventFilter(QObject *obj, QEvent *event) {
 		switch (event->type()) {
 			case 2://mouse press
                 if(label == ui->label_edit_menu) {
-                    menu->removeAction(open);
-                    menu->addAction(editTest);
                     p.setX(label->geometry().bottomLeft().x() - 100);
                     p.setY(label->geometry().bottomLeft().y());
+                    menuEdit->move(label->mapToGlobal(p));
+                    menuEdit->show();
                 }
 
                 if(label == ui->label_tips_menu) {
@@ -52,14 +80,11 @@ bool itchy::eventFilter(QObject *obj, QEvent *event) {
                 }
 
                 if(label == ui->label_file_menu){
-                    menu->removeAction(editTest);
-                    menu->addAction(open);
                     p.setX(label->geometry().bottomLeft().x() - 60);
                     p.setY(label->geometry().bottomLeft().y());
+                    menuFile->move(label->mapToGlobal(p));
+                    menuFile->show();
                 }
-
-                menu->move(label->mapToGlobal(p));
-				menu->show();
                 break;
 			case 10://mouse enter
 				label->setStyleSheet("color:orange;");

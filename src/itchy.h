@@ -17,16 +17,19 @@ public:
     ~itchy();
     
 private slots:
-
-    void label_edit_menu_hovered();
+    void openFile();
+    void saveFile();
+    void newFile();
 
 private:
     Ui::itchy *ui;
-    QMenu *menu;
-    QAction *editTest;
-    QAction *tipTest;
-    QAction *open;
+    QMenu *menuFile;
+    QMenu *menuEdit;
+    QAction *btnNew;
+    QAction *btnOpen;
+    QAction *btnSave;
     QPoint p;
+    QString projectFileName;
     MainPane *pane;
 
 protected:
