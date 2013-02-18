@@ -1,4 +1,7 @@
 #include <QtGui>
+#include <QImage>
+#include <QRgb>
+#include <stdlib.h>
 #include "mainpane.h"
 
 MainPane::MainPane(QWidget *parent) :
@@ -9,7 +12,16 @@ MainPane::MainPane(QWidget *parent) :
 
 void MainPane::paintEvent(QPaintEvent *) {
     QPainter painter(this);
+    QImage image(640, 480, QImage::Format_RGB32);
+    for(int x = 1; x < 640; x++) {
+        for(int y = 1; y < 480; y++) {
+            int r = rand() % (255 - 0 + 1) + 0;
+            int g = rand() % (255 - 0 + 1) + 0;
+            int b = rand() % (255 - 0 + 1) + 0;
+            image.setPixel(x, y, qRgb(r, g, b));
+        }
+    }
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.drawText(20, 20, QString("Hello World! Itchy++"));
-    painter.drawRoundRect(40, 40, 50, 50);
+    painter.drawImage(0, 0, image);
+    update();
 }
