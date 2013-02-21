@@ -12,9 +12,9 @@ MainPane::MainPane(QWidget *parent) :
 
 void MainPane::paintEvent(QPaintEvent *) {
     QPainter painter(this);
-    QImage image(640, 480, QImage::Format_RGB32);
-    for(int x = 0; x < 640; x++) {
-        for(int y = 0; y < 480; y++) {
+    QImage image(480, 360, QImage::Format_RGB32);
+    for(int x = 0; x < 480; x++) {
+        for(int y = 0; y < 360; y++) {
             int r = rand() % (255 - 0 + 1) + 0;
             int g = rand() % (255 - 0 + 1) + 0;
             int b = rand() % (255 - 0 + 1) + 0;
