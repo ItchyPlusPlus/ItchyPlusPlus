@@ -10,10 +10,12 @@ SOURCES += src/itchy.cpp\
             src/guiobjects.cpp\
             src/main.cpp \
             src/mainpane.cpp \
+    src/blockwidget.cpp
 
 HEADERS  += src/itchy.h\
             src/guiobjects.h \
-            src/mainpane.h
+            src/mainpane.h \
+    src/blockwidget.h
 
 FORMS    += itchy.ui
 

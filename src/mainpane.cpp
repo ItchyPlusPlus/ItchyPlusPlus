@@ -3,11 +3,18 @@
 #include <QRgb>
 #include <stdlib.h>
 #include "mainpane.h"
+#include "blockwidget.h"
+
+BlockWidget *bw;
 
 MainPane::MainPane(QWidget *parent) :
     QWidget(parent) {
     //setFixedSize(200, 200);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    //bw.setParent(parent);
+    bw=new BlockWidget(this);
+    bw->move(500, 500);
+    bw->show();
 }
 
 void MainPane::paintEvent(QPaintEvent *) {
@@ -23,5 +30,6 @@ void MainPane::paintEvent(QPaintEvent *) {
     }
     painter.setRenderHint(QPainter::Antialiasing);
     painter.drawImage(0, 0, image);
+    bw->move(mapFromGlobal(QCursor::pos()));
     update();
 }
