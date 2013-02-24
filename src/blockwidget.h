@@ -3,6 +3,13 @@
 
 #include <QWidget>
 
+const int CORNER_INSET = 3;
+const int NotchL1 = 13;
+const int NotchL2 = 16;
+const int NotchR1 = 24;
+const int NotchR2 = 27;
+const int NotchDepth = 3;
+
 class BlockWidget : public QWidget
 {
     Q_OBJECT
