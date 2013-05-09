@@ -30,6 +30,6 @@ void MainPane::paintEvent(QPaintEvent *) {
     }
     painter.setRenderHint(QPainter::Antialiasing);
     painter.drawImage(0, 0, image);
-    bw->move(mapFromGlobal(QCursor::pos()));
+    //bw->move(mapFromGlobal(QCursor::pos()));
     update();
 }

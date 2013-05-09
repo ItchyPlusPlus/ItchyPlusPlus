@@ -43,3 +43,17 @@ void BlockWidget::paintEvent(QPaintEvent *) {
 
     painter.drawText(10, 10, "BlockWidget");
 }
+
+bool _mouseDown = 0;
+
+void BlockWidget::mousePressEvent(QMouseEvent *event) {
+  _mouseDown = true;
+}
+void BlockWidget::mouseReleaseEvent(QMouseEvent *event) {
+  _mouseDown = false;
+}
+void BlockWidget::mouseMoveEvent(QMouseEvent *event) {
+  if(_mouseDown) {
+      move(mapToParent(event->pos()));
+    }
+}
