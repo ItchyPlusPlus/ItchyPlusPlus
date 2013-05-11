@@ -9,6 +9,7 @@ after_success:
  - cp ItchyPlusPlus obj/
  - cp --preserve=timestamps -r ../src obj/
  - cd obj/
+ - ls -l
  - timeout 30s xvfb-run ./ItchyPlusPlus
  - gcov ./*
  - coveralls --exclude lib --exclude tests
