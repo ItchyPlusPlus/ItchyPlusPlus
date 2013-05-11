@@ -1,5 +1,9 @@
 QT       += core gui
 
+QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+QMAKE_LDFLAGS += -fprofile-arcs -ftest-coverage
+LIBS += -lgcov
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = ItchyPlusPlus
