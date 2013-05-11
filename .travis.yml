@@ -7,7 +7,7 @@ script: qmake; make
 after_success:
  - cd build/
  - timeout 30s xvfb-run ./ItchyPlusPlus
- - gcov itchyplusplus ./obj/*
+ - gcov obj/*
  - coveralls --exclude lib --exclude tests
 # Change this to your needs
 
