@@ -1,6 +1,13 @@
 language: cpp
 compiler: gcc
-install: sudo apt-get install libqt4-dev qt4-qmake
+install:
+ - sudo apt-get install libqt4-dev qt4-qmake
+  - sudo easy_install https://github.com/eddyxu/cpp-coveralls/archive/master.zip
 script: qmake; make
+after_success:
+ - cd build/
+ - ./ItchyPlusPlus
+ - gcov itchyplusplus ./obj/*
+ - coveralls --exclude lib --exclude tests
 # Change this to your needs
 
