@@ -6,7 +6,7 @@ install:
 script: qmake; make
 after_success:
  - cd build/
- - ./ItchyPlusPlus
+ - xvfb-run ./ItchyPlusPlus
  - gcov itchyplusplus ./obj/*
  - coveralls --exclude lib --exclude tests
 # Change this to your needs
