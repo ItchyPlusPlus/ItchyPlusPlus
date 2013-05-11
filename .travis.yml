@@ -7,7 +7,7 @@ script: qmake; make
 after_success:
  - cd build/
  - cp ItchyPlusPlus obj/
- - cp -r ../src obj/
+ - cp --preserve=timestamps -r ../src obj/
  - cd obj/
  - timeout 30s xvfb-run ./ItchyPlusPlus
  - gcov ./*
